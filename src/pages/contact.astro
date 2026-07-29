@@ -2,6 +2,24 @@
 import InteriorLayout from "../layouts/InteriorLayout.astro";
 import ContactForm from "../components/forms/ContactForm.astro";
 import { FORMSPREE, ORG } from "../lib/config";
+
+const staff = [
+  {
+    name: "Dan Silver",
+    title: "Executive Director",
+    phone: "213-804-2750",
+    email: "dsilverla@me.com",
+    handles:
+      "General information and correspondence; state-level programs; and Los Angeles, Orange, Riverside, & San Bernardino Counties programs",
+  },
+  {
+    name: "Michael Beck",
+    title: "San Diego Director",
+    phone: "619-846-3003",
+    email: "beckehl@icloud.com",
+    handles: "San Diego County programs",
+  },
+];
 ---
 
 <InteriorLayout
@@ -9,12 +27,55 @@ import { FORMSPREE, ORG } from "../lib/config";
   description="Get in touch with the Endangered Habitats League."
   eyebrow="Contact"
   heading="Contact us"
-  intro="The Endangered Habitats League works throughout Southern California. If you need information or assistance, send us a message below."
+  intro="The Endangered Habitats League works throughout Southern California. If you need information or assistance, please contact one of the staff members listed below."
 >
-  <div class="px-5 pb-16 tablet:px-14">
-    <ContactForm endpoint={FORMSPREE.contact} />
-    <p class="mt-8 text-[14px] text-text-secondary">
-      {ORG.addressLine}, {ORG.city}, {ORG.state} &middot; {ORG.phone}
-    </p>
+  <div class="flex flex-col gap-12 px-5 pb-16 tablet:flex-row tablet:gap-16 tablet:px-14">
+    <div class="flex-1">
+      <h2 class="text-h3 text-text-primary">Staff directory</h2>
+      <div class="mt-5 flex flex-col gap-6">
+        {
+          staff.map((person) => (
+            <div class="border-b border-border pb-6 last:border-b-0">
+              <div class="font-display text-[18px] font-semibold text-text-primary">
+                {person.name}
+              </div>
+              <div class="text-eyebrow mt-1 text-ochre">{person.title}</div>
+              <p class="mt-2 max-w-[420px] text-[14px] leading-[1.6] text-text-secondary">
+                {person.handles}
+              </p>
+              <div class="mt-2 flex flex-col gap-0.5 text-[14px] text-text-secondary">
+                <a href={`tel:${person.phone}`} class="text-link inline-block w-fit">
+                  {person.phone}
+                </a>
+                <a href={`mailto:${person.email}`} class="text-link inline-block w-fit">
+                  {person.email}
+                </a>
+              </div>
+            </div>
+          ))
+        }
+        <div>
+          <div class="font-display text-[18px] font-semibold text-text-primary">
+            Endangered Habitats Conservancy
+          </div>
+          <p class="mt-2 max-w-[420px] text-[14px] leading-[1.6] text-text-secondary">
+            For matters and concerns related to EHC and its properties
+          </p>
+          <a href="tel:619-381-9357" class="text-link mt-2 inline-block w-fit text-[14px] text-text-secondary">
+            619-381-9357
+          </a>
+        </div>
+      </div>
+      <p class="mt-8 text-[14px] text-text-secondary">
+        {ORG.addressLine}, {ORG.city}, {ORG.state} {ORG.zip}
+      </p>
+    </div>
+
+    <div class="flex-1">
+      <h2 class="text-h3 text-text-primary">Send a message</h2>
+      <div class="mt-5">
+        <ContactForm endpoint={FORMSPREE.contact} />
+      </div>
+    </div>
   </div>
 </InteriorLayout>

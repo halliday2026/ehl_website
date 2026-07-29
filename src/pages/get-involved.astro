@@ -3,21 +3,42 @@ import InteriorLayout from "../layouts/InteriorLayout.astro";
 import NewsletterForm from "../components/forms/NewsletterForm.astro";
 import TodoNotice from "../components/ui/TodoNotice.astro";
 import { FORMSPREE, NEWSLETTER } from "../lib/config";
+
+const benefits = [
+  "Our electronic quarterly Newsletter, with updates on key conservation issues, reports on our work, and information on the fascinating plants and animals of our area.",
+  "At your request only, occasional action alerts notifying you of important matters and opportunities to participate and, through your action, make a difference.",
+  "No more than two emails a year asking for optional financial contributions — never more, and never shared outside EHL.",
+];
 ---
 
 <InteriorLayout
   title="Get Involved"
   description="Volunteer, give, and stay connected with the Endangered Habitats League's work protecting Southern California."
   eyebrow="Get Involved"
-  heading="Get involved in protecting Southern California"
-  intro="Sign up for updates on our work, our preserves, and the ways you can help."
+  heading="You are invited"
+  intro="To reach out and expand our conservation community, we want to share our work and engage a wide range of people in our campaign to save the natural world around us. Signing up means you support our mission and the credible, collaborative work we do to achieve it."
 >
   <div class="px-5 pb-16 tablet:px-14">
-    <h2 class="text-h3 text-text-primary">Sign up for updates</h2>
-    <p class="mt-2 max-w-[520px] text-[14px] text-text-secondary tablet:text-[15px]">
-      This replaces the legacy member sign-up — submissions now arrive by
-      email rather than the old newsletter database.
+    <h2 class="text-h3 text-text-primary">In return, you'll receive</h2>
+    <ul class="mt-4 flex max-w-[560px] flex-col gap-3">
+      {
+        benefits.map((benefit) => (
+          <li class="flex gap-3 text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+            <span class="text-poppy" aria-hidden="true">
+              —
+            </span>
+            <span>{benefit}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-6 max-w-[520px] text-[14px] leading-[1.6] text-text-secondary">
+      Our network is secure and we pledge never to share your name, email
+      address, or other information outside of EHL. Let's work together to
+      hand down our beautiful natural world to our children.
     </p>
+
+    <h2 class="text-h3 mt-10 text-text-primary">Sign up for updates</h2>
     <div class="mt-5 max-w-[480px]">
       <NewsletterForm endpoint={FORMSPREE.joinUs} idPrefix="getinvolved-newsletter" />
     </div>
@@ -39,7 +60,8 @@ import { FORMSPREE, NEWSLETTER } from "../lib/config";
     </p>
   </div>
   <TodoNotice label="TODO(EHL): volunteer + events content">
-    Volunteer opportunities and an events calendar will be migrated here in a
-    later phase.
+    The legacy site's "Join Us" page only covered the newsletter signup —
+    dedicated volunteer opportunities and an events calendar aren't mirrored
+    from anywhere and will need real content from the client.
   </TodoNotice>
 </InteriorLayout>

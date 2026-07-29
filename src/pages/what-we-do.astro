@@ -1,6 +1,5 @@
 ---
 import InteriorLayout from "../layouts/InteriorLayout.astro";
-import TodoNotice from "../components/ui/TodoNotice.astro";
 ---
 
 <InteriorLayout
@@ -10,9 +9,77 @@ import TodoNotice from "../components/ui/TodoNotice.astro";
   heading="Four ways we protect the region"
   intro="Dedicated to the protection of the diverse ecosystems of Southern California — and to sensitive, sustainable land use for the benefit of all the region's inhabitants."
 >
-  <TodoNotice label="TODO(EHL): full What We Do content">
-    Expanded detail on Saving Nature, Strategic Planning, and Collaboration —
-    each with its own supporting content — will be migrated here in a later
-    phase.
-  </TodoNotice>
+  <div class="flex flex-col gap-12 px-5 pb-16 tablet:gap-16 tablet:px-14">
+    <section>
+      <h2 class="text-h2 text-text-primary">Saving Nature</h2>
+      <p class="text-lede mt-3 max-w-[720px] text-text-quote">
+        EHL identifies and safeguards our most critical lands.
+      </p>
+      <p class="mt-4 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+        From majestic oak woodlands and scenic meadows, to gentle hillsides
+        of coastal sage scrub, to the life sustaining waters of streams and
+        wetlands, we advocate for the preservation of natural habitats in
+        San Diego, Orange, Riverside, Los Angeles and San Bernardino
+        Counties and related ecological regions.
+      </p>
+      <p class="mt-4 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+        EHL gives voice to the plants and animals for whom it is our
+        privilege and responsibility to speak. This region is one of the
+        world's most biologically diverse, and many of our plant and animal
+        species are threatened with extinction. As Southern California's
+        only regional conservation organization, EHL has led the way in
+        establishing an unprecedented, interconnected system of nature
+        reserves. However, there is much more work to do. By focusing on
+        science-based priorities, and using the Endangered Species Act as
+        leverage, we continue the monumental work of preserving our natural
+        heritage for future generations.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-h2 text-text-primary">Strategic Planning</h2>
+      <p class="text-lede mt-3 max-w-[720px] text-text-quote">
+        EHL works to establish healthy co-existence between people and
+        nature by integrating comprehensive and sustainable land use with
+        permanent resource protection.
+      </p>
+      <p class="mt-4 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+        Boasting one of the world's most desirable climates as well as
+        beautiful natural landscapes, Southern California's metropolitan
+        region draws a constant influx of new businesses and residents. In
+        response, EHL participates in regional planning to curtail sprawl
+        and preserve intact rural and agricultural landscapes. We actively
+        support the revitalization of urban areas and the development of
+        vibrant community centers, effective mobility and affordable
+        housing choices. Through our continued participation in planning
+        efforts, we can achieve the highest quality of life for all the
+        region's inhabitants.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-h2 text-text-primary">Collaboration</h2>
+      <p class="text-lede mt-3 max-w-[720px] text-text-quote">
+        EHL uses an innovative approach for environmental advocacy that
+        captures the value of collaboration.
+      </p>
+      <p class="mt-4 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+        Along with communities, businesses, landowners, and government
+        agencies, we develop solutions that serve all stakeholders and
+        preserve nature. Our integrity and results-oriented methodology has
+        garnered respect and credibility among a broad spectrum of groups
+        and agencies. These relationships continue to lead to ever greater
+        opportunities for conservation.
+      </p>
+      <p class="mt-4 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+        As a team of seasoned professionals, we at EHL apply the highest
+        standards to all aspects of our work. We drive the implementation
+        of state of the art management and monitoring practices for the
+        stewardship of preserve lands. We employ the best science and
+        research for the most effective environmental advocacy and
+        conservation. When all other means have been exhausted, we take
+        legal measures to protect our natural heritage.
+      </p>
+    </section>
+  </div>
 </InteriorLayout>

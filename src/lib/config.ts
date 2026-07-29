@@ -21,12 +21,15 @@ export const FORMSPREE = {
 } as const;
 
 export const ORG = {
-  /** Design copy is literally "[ Street Address ]" — do not invent a value. */
-  addressLine: "[ Street Address ]",
+  /**
+   * Mirrored from the live contact.html, which lists both "505 S Flower St
+   * #71001" and "PO Box 71001" for the same box number — using the street
+   * format here since it's the more complete/deliverable of the two.
+   */
+  addressLine: "505 S Flower St #71001",
   city: "Los Angeles",
   state: "CA",
-  /** TODO(EHL): confirm ZIP for structured data / footer if desired. */
-  zip: "TODO-EHL-zip",
+  zip: "90071",
   /** Given in the brief — CONFIRM this is still current before it goes live/visible in nav or footer. */
   phone: "213-804-2750",
   /** Footer copy reads "since [year]" in the design handoff. */
@@ -67,6 +70,7 @@ export const LOGO = {
  * subpath and has no /news/ of its own.
  */
 export const NEWSLETTER = {
-  current: "https://ehleague.org/news/Public/GetCurrent.aspx",
-  archive: "https://ehleague.org/news/Public/Archive.aspx",
+  current: "https://ehleague.org/news/public/GetCurrent.aspx",
+  // Corrected: this is a static root-level page, not under /news/.
+  archive: "https://ehleague.org/newsletter_archive_toc.html",
 } as const;

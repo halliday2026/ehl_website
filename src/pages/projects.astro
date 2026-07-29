@@ -1,6 +1,43 @@
 ---
 import InteriorLayout from "../layouts/InteriorLayout.astro";
-import TodoNotice from "../components/ui/TodoNotice.astro";
+
+const regions = [
+  {
+    name: "San Diego",
+    paragraphs: [
+      `With EHL as a key participant, the 172,000-acre Multiple Species Conservation Program is giving threatened natural lands and wildlife in the San Diego region a secure future. To advance this effort, we seek expansions of the majestic San Diego National Wildlife Refuge and Rancho Jamul Ecological Reserve.`,
+      `After helping shape a precedent-setting Environmental Mitigation Program as part of San Diego County's half-cent sales tax renewal, EHL is now focused on implementation. This ballot measure, passed in November of 2004, will provide over $1.2 billion in funding for habitat conservation, mitigation for transportation projects, and incentives for pedestrian-friendly communities.`,
+      `EHL helped lead the effort to preserve the 2,600 acre Crestridge Ecological Reserve and has created an innovative educational program, the Earth Discovery Institute, to teach young people the value of Southern California's unique natural heritage.`,
+      `In San Diego County's crucial "2020" General Plan Update, EHL is leading the way with a vision to preserve a world-class countryside, including the Ramona Grasslands.`,
+      `To restore an imperiled river and benefit surrounding communities, EHL was instrumental in establishing the thriving San Diego River Park, and is currently working to expand its scope.`,
+    ],
+  },
+  {
+    name: "Inland Empire",
+    paragraphs: [
+      `With EHL playing a key role, the County of Riverside has adopted the ambitious Multiple Species Habitat Conservation Plan to protect more than 150,000 acres of vital wildlife habitat. Through our Canyons Project, we are ensuring proper implementation and helping fund the protection of many natural treasures.`,
+      `To help reverse the tide of sprawl in this rapidly growing region, EHL has made compact Community Centers with "Transit Oases" centerpieces of Riverside County's visionary Integrated Project, which combines land use, transportation and habitat planning.`,
+      `EHL is monitoring the vanishing floodplains and sand dunes of San Bernardino County, and will continue to bring legal action to compel protection of endangered animals and plants in these areas.`,
+      `In the Chino Basin, we have collaborated with local government and a forward-looking developer to preserve agricultural and natural open space while properly creating a higher density livable community.`,
+    ],
+  },
+  {
+    name: "Orange and Los Angeles",
+    paragraphs: [
+      `With our help, The Nature Reserve of Orange County has made great progress in linking the coast with the foothills and the National Forest. In 2005, necessary litigation helped to save critical wildlife corridors from development.`,
+      `In southern Orange County, EHL formed The Heart and Soul Coalition to save large critical portions of the historic 23,000-acre Rancho Mission Viejo, including areas within the pristine San Mateo watershed. We achieved a successful partnership with the landowner for limited development, ongoing ranching, and future habitat restoration.`,
+      `EHL is participating in a coalition to save San Onofre State Beach from the proposed Foothill Tollroad, and to identify transportation alternatives.`,
+      `On the Palos Verdes Peninsula, EHL helped put together a Natural Communities Conservation Plan to tie the remaining natural lands together into a haven for endangered plants and animals.`,
+      `In northern Los Angeles County, EHL is working with other groups to protect the Tejon Ranch, where development threatens one of California's most important landscapes.`,
+    ],
+  },
+  {
+    name: "State-wide",
+    paragraphs: [
+      `After co-founding the California Futures Network, EHL continues to play a major role in efforts to put in place comprehensive growth management, resource protection, and efficient patterns of development.`,
+    ],
+  },
+];
 ---
 
 <InteriorLayout
@@ -10,8 +47,18 @@ import TodoNotice from "../components/ui/TodoNotice.astro";
   heading="From the coast to the foothills"
   intro="We hold land in permanent trust and keep the region's wildlife corridors connected — across counties, watersheds, and the working landscapes in between."
 >
-  <TodoNotice label="TODO(EHL): full project list">
-    The complete regional project breakdown (San Diego, Inland Empire, and
-    beyond) from the legacy site will be migrated here in a later phase.
-  </TodoNotice>
+  <div class="flex flex-col gap-12 px-5 pb-16 tablet:gap-16 tablet:px-14">
+    {
+      regions.map((region) => (
+        <section>
+          <h2 class="text-h2 text-text-primary">{region.name}</h2>
+          <div class="mt-4 flex max-w-[720px] flex-col gap-4">
+            {region.paragraphs.map((p) => (
+              <p class="text-[15px] leading-[1.6] text-text-secondary">{p}</p>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
 </InteriorLayout>
