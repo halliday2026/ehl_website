@@ -41,6 +41,21 @@ const {
   height,
   class: className = "",
 } = Astro.props;
+
+// Pass only the dimension(s) actually overridden so Astro derives the other
+// from the source's native aspect ratio — passing mismatched width+height
+// together would distort the image instead of just resizing it. Falls back
+// to the full native size (both dimensions) only when neither is overridden.
+const imageDimensions =
+  src && typeof src !== "string"
+    ? width && height
+      ? { width, height }
+      : width
+        ? { width }
+        : height
+          ? { height }
+          : { width: src.width, height: src.height }
+    : {};
 ---
 
 <div
@@ -52,8 +67,7 @@ const {
       <Image
         src={src}
         alt={alt}
-        width={width ?? src.width}
-        height={height ?? src.height}
+        {...imageDimensions}
         loading={loading}
         fetchpriority={fetchpriority}
         class="absolute inset-0 h-full w-full object-cover"

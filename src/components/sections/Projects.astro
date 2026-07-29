@@ -23,7 +23,6 @@ const projects = [
     county: "Inland valleys",
     src: oakWoodlandImg,
     alt: "A frost-covered oak tree on protected grassland at Tejon Ranch",
-    mobileHidden: true, // design spec: mobile shows 2 of 3 project cards
   },
 ];
 ---
@@ -43,7 +42,7 @@ const projects = [
   <div class="flex flex-col gap-5 tablet:grid tablet:grid-cols-3 tablet:gap-[30px]">
     {
       projects.map((project) => (
-        <div data-reveal class:list={[project.mobileHidden ? "hidden tablet:block" : ""]}>
+        <div data-reveal>
           <DuotoneImage
             src={project.src}
             alt={project.alt}
