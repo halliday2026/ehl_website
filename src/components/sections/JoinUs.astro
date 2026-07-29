@@ -1,0 +1,19 @@
+---
+import NewsletterForm from "../forms/NewsletterForm.astro";
+import { FORMSPREE } from "../../lib/config";
+---
+
+<section
+  data-reveal
+  id="join"
+  class="flex flex-col gap-6 bg-warm-alt px-5 py-11 tablet:flex-row tablet:flex-wrap tablet:items-center tablet:justify-between tablet:gap-14 tablet:px-14 tablet:py-[78px]"
+>
+  <div class="max-w-[460px]">
+    <h2 class="text-h2 text-text-primary">Join us</h2>
+    <p class="mt-2.5 text-[14.5px] leading-[1.55] text-text-secondary tablet:mt-3.5 tablet:text-base tablet:leading-[1.6]">
+      Get involved in protecting Southern California. Sign up for updates on
+      our work, our preserves, and the ways you can help.
+    </p>
+  </div>
+  <NewsletterForm endpoint={FORMSPREE.joinUs} idPrefix="home-newsletter" />
+</section>

@@ -1,0 +1,49 @@
+name: Deploy to production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false # never let two FTP syncs race against the shared legacy web root
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          # TODO(EHL): confirm the real Hostway FTP root before the first live deploy.
+          server-dir: /
+          # CRITICAL: this web root is shared with a live legacy ASP.NET app (the
+          # newsletter). Never set this to true — it would wipe files this repo
+          # doesn't contain.
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            web.config
+            Global.asax
+            involved.aspx
+            bin/**
+            App_Data/**
+            App_GlobalResources/**
+            news/**

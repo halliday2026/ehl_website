@@ -1,0 +1,34 @@
+---
+interface Props {
+  href: string;
+  tone?: "on-paper" | "on-paper-muted" | "on-dark" | "on-photo";
+  bordered?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  tone = "on-paper",
+  bordered = true,
+  class: className = "",
+} = Astro.props;
+
+const toneClasses: Record<string, string> = {
+  "on-paper": "text-deep-green border-border",
+  "on-paper-muted": "text-text-muted border-border",
+  "on-dark": "text-paper border-divider-dark",
+  "on-photo": "text-paper border-[rgba(251,248,241,.45)]",
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    "text-link inline-flex min-h-[44px] items-center font-body font-semibold no-underline",
+    toneClasses[tone],
+    bordered ? "border-b pb-[3px]" : "",
+    className,
+  ]}
+>
+  <slot />
+</a>

@@ -1,0 +1,75 @@
+---
+import DuotoneImage from "../ui/DuotoneImage.astro";
+import Eyebrow from "../ui/Eyebrow.astro";
+import Button from "../ui/Button.astro";
+import TextLink from "../ui/TextLink.astro";
+import SiteNav from "../nav/SiteNav.astro";
+import { DONATE_URL } from "../../lib/config";
+import heroImg from "../../assets/images/tree_frog_hero.webp";
+---
+
+<section class="relative h-[560px] overflow-hidden bg-[#19291f] tablet:h-[680px]">
+  <div
+    data-parallax
+    class="absolute inset-x-0 -top-20 bottom-0 will-change-transform tablet:-top-[120px]"
+  >
+    <DuotoneImage
+      src={heroImg}
+      alt=""
+      duotoneColor="#2a3a28"
+      duotoneOpacity={0.3}
+      radius="0"
+      loading="eager"
+      fetchpriority="high"
+      class="h-full w-full"
+    />
+  </div>
+  <div
+    class="pointer-events-none absolute inset-0"
+    style="background:linear-gradient(180deg,rgba(20,30,24,.34),rgba(20,30,24,0) 30%,rgba(15,23,17,.84) 94%)"
+  />
+
+  <div class="relative z-10 flex h-full flex-col justify-between">
+    <SiteNav variant="overlay" />
+
+    <div class="px-5 pb-7 tablet:px-14 tablet:pb-11">
+      <div class="max-w-[800px]">
+        <Eyebrow
+          tone="cream-on-photo"
+          class="[text-shadow:0_1px_8px_rgba(0,0,0,.35)]"
+        >
+          Southern California Land Conservation
+        </Eyebrow>
+        <h1
+          class="text-h1 mt-3 text-paper [text-shadow:0_2px_24px_rgba(0,0,0,.35)] [text-wrap:balance] tablet:mt-[18px]"
+        >
+          Keeping Southern California wild.
+        </h1>
+        <p
+          class="text-lede mt-3.5 max-w-[620px] text-[rgba(251,248,241,.94)] [text-shadow:0_1px_12px_rgba(0,0,0,.35)] [text-wrap:pretty] tablet:mt-5"
+        >
+          Dedicated to the protection of the diverse ecosystems of Southern
+          California — and to sensitive, sustainable land use for the benefit
+          of all the region's inhabitants.
+        </p>
+        <div
+          class="mt-6 flex flex-col gap-3 tablet:mt-[34px] tablet:flex-row tablet:items-center tablet:gap-4"
+        >
+          <Button href={DONATE_URL} external size="lg" block class="tablet:w-auto">
+            Donate
+          </Button>
+          <TextLink
+            href="#explore"
+            tone="on-photo"
+            bordered={false}
+            class="w-full justify-center tablet:w-auto tablet:justify-start tablet:border-b tablet:pb-[3px]"
+          >
+            Explore our work →
+          </TextLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../../scripts/parallax.ts"></script>

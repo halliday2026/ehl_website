@@ -1,0 +1,102 @@
+---
+import { Image } from "astro:assets";
+import Button from "../ui/Button.astro";
+import MobileNav from "./MobileNav.astro";
+import { PRIMARY_NAV } from "../../lib/nav";
+import { DONATE_URL } from "../../lib/config";
+import { withBase } from "../../lib/url";
+import ehlLogo from "../../assets/images/EHL_Logo.png";
+
+interface Props {
+  variant: "overlay" | "solid";
+}
+
+const { variant } = Astro.props;
+const isOverlay = variant === "overlay";
+---
+
+<header
+  class:list={[
+    "flex items-center justify-between gap-4 px-5 py-4 tablet:px-14 tablet:py-[26px]",
+    isOverlay ? "" : "relative border-b border-border bg-paper",
+  ]}
+>
+  <a href={withBase("/")} class="flex items-center gap-2.5 tablet:gap-3">
+    <Image
+      src={ehlLogo}
+      alt=""
+      width={160}
+      height={205}
+      class="h-16 w-auto flex-none tablet:h-[72px]"
+    />
+    <span
+      class:list={[
+        "font-display text-[15px] font-semibold leading-tight tablet:text-xl",
+        isOverlay
+          ? "max-w-[145px] text-paper [text-shadow:0_1px_8px_rgba(0,0,0,.4)] tablet:max-w-none"
+          : "text-text-primary",
+      ]}
+    >
+      Endangered Habitats League
+    </span>
+  </a>
+
+  <div class="flex items-center gap-2 tablet:gap-[30px]">
+    <nav
+      aria-label="Primary"
+      class="hidden items-center gap-[30px] font-body text-[14.5px] font-medium tablet:flex"
+    >
+      {
+        PRIMARY_NAV.map((link) => (
+          <a
+            href={withBase(link.href)}
+            class:list={[
+              "text-link",
+              isOverlay ? "text-[rgba(251,248,241,.9)]" : "text-text-primary",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hidden tablet:block">
+      <Button href={DONATE_URL} external size="sm">Donate</Button>
+    </div>
+    <div class="tablet:hidden">
+      <Button
+        href={DONATE_URL}
+        external
+        size="sm"
+        class="!min-h-0 !px-[15px] !py-[8px] !text-[13px]"
+      >
+        Donate
+      </Button>
+    </div>
+
+    <button
+      type="button"
+      data-hamburger-toggle
+      aria-expanded="false"
+      aria-controls="mobile-nav-panel"
+      class="flex h-11 w-11 flex-col items-center justify-center gap-[4px] tablet:hidden"
+    >
+      <span class="sr-only">Menu</span>
+      <span
+        aria-hidden="true"
+        class:list={["h-[2px] w-[22px] rounded-full", isOverlay ? "bg-paper" : "bg-text-primary"]}
+      />
+      <span
+        aria-hidden="true"
+        class:list={["h-[2px] w-[22px] rounded-full", isOverlay ? "bg-paper" : "bg-text-primary"]}
+      />
+      <span
+        aria-hidden="true"
+        class:list={["h-[2px] w-[22px] rounded-full", isOverlay ? "bg-paper" : "bg-text-primary"]}
+      />
+    </button>
+  </div>
+</header>
+
+<MobileNav />

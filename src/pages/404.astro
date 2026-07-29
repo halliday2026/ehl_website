@@ -1,0 +1,18 @@
+---
+import InteriorLayout from "../layouts/InteriorLayout.astro";
+import Button from "../components/ui/Button.astro";
+import { withBase } from "../lib/url";
+---
+
+<InteriorLayout
+  title="Page not found"
+  description="The page you're looking for doesn't exist or may have moved."
+  eyebrow="404"
+  heading="Page not found"
+  intro="The page you're looking for doesn't exist or may have moved."
+  noindex
+>
+  <div class="px-5 pb-16 tablet:px-14">
+    <Button href={withBase("/")}>Return home</Button>
+  </div>
+</InteriorLayout>

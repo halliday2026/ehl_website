@@ -1,0 +1,43 @@
+---
+import Button from "../ui/Button.astro";
+
+interface Props {
+  endpoint: string;
+  idPrefix?: string;
+}
+
+const { endpoint, idPrefix = "newsletter" } = Astro.props;
+const emailId = `${idPrefix}-email`;
+const errorId = `${emailId}-error`;
+const statusId = `${idPrefix}-status`;
+---
+
+<form
+  data-formspree-form
+  data-endpoint={endpoint}
+  data-success-message="Thanks — you're on the list."
+  novalidate
+  class="flex w-full flex-col gap-3 tablet:max-w-[480px] tablet:flex-1"
+>
+  <div class="flex flex-col gap-3 tablet:flex-row">
+    <div class="flex-1">
+      <label for={emailId} class="sr-only">Email address</label>
+      <input
+        id={emailId}
+        name="email"
+        type="email"
+        required
+        aria-describedby={errorId}
+        placeholder="Your email address"
+        class="w-full rounded-btn border border-border bg-paper px-[18px] py-4 font-body text-[15px] text-text-primary"
+      />
+    </div>
+    <Button type="submit" variant="dark" size="md" block class="tablet:w-auto">
+      Sign up
+    </Button>
+  </div>
+  <p id={errorId} data-field-error aria-live="polite" class="text-[13px] text-poppy"></p>
+  <p id={statusId} data-form-status role="status" aria-live="polite" class="text-[13px] text-deep-green"></p>
+</form>
+
+<script src="../../scripts/forms.ts"></script>

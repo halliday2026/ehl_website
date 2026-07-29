@@ -1,0 +1,82 @@
+---
+import Eyebrow from "../ui/Eyebrow.astro";
+import TextLink from "../ui/TextLink.astro";
+import DuotoneImage from "../ui/DuotoneImage.astro";
+import { withBase } from "../../lib/url";
+import savingNatureImg from "../../assets/images/cagn.webp";
+import strategicPlanningImg from "../../assets/images/skyline-vista.webp";
+import collaborationImg from "../../assets/images/bluff-shore.webp";
+import landTrustImg from "../../assets/images/pic-orangecounty.webp";
+
+const items = [
+  {
+    title: "Saving Nature",
+    body: "We protect the habitats that define Southern California — coastal sage scrub, chaparral, oak woodland — and the wildlife that depends on them.",
+    src: savingNatureImg,
+    alt: "A California gnatcatcher perched in coastal sage scrub",
+  },
+  {
+    title: "Strategic Planning",
+    body: "We shape regional conservation planning, guiding growth toward sensitive, sustainable land use across the region.",
+    src: strategicPlanningImg,
+    alt: "A wide valley view of chaparral-covered hills and mountains in Southern California",
+  },
+  {
+    title: "Collaboration",
+    body: "We work alongside public agencies, landowners, and fellow nonprofits to find durable solutions that last.",
+    src: collaborationImg,
+    alt: "A coastal bluff meeting the shoreline at golden hour",
+  },
+  {
+    title: "Land Trust",
+    body: "Through the Endangered Habitats Conservancy, we acquire and steward land in permanent protection.",
+    src: landTrustImg,
+    alt: "A trail winding through protected oak woodland",
+  },
+];
+---
+
+<section
+  id="explore"
+  class="bg-paper px-5 pt-3 pb-11 tablet:px-14 tablet:pt-2 tablet:pb-[90px]"
+>
+  <div
+    data-reveal
+    class="mb-6 flex items-end justify-between tablet:mb-[46px]"
+  >
+    <div>
+      <Eyebrow>What we do</Eyebrow>
+      <h2 class="text-h2 mt-2.5 text-text-primary tablet:mt-3.5">
+        Four ways we protect the region
+      </h2>
+    </div>
+    <div class="hidden tablet:block">
+      <TextLink href={withBase("/what-we-do/")} tone="on-paper-muted" class="text-[14.5px]">
+        All programs →
+      </TextLink>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col gap-6 tablet:grid tablet:grid-cols-2 tablet:gap-x-11 tablet:gap-y-9"
+  >
+    {
+      items.map((item) => (
+        <div data-reveal class="flex items-start gap-4 tablet:gap-6">
+          <DuotoneImage
+            src={item.src}
+            alt={item.alt}
+            duotoneOpacity={0.22}
+            class="h-[68px] w-[84px] flex-none tablet:h-[124px] tablet:w-[168px]"
+          />
+          <div>
+            <h3 class="text-h3 text-text-primary">{item.title}</h3>
+            <p class="mt-1.5 text-[13.5px] leading-[1.55] text-text-secondary tablet:mt-2.5 tablet:text-[15px] tablet:leading-[1.6]">
+              {item.body}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// Production replacement for the design handoff's drag-and-drop
+// image-slot.js: when no real photo exists yet, renders a labeled
+// placeholder box instead of a broken <img>. Swap in `src` once real
+// habitat photography is sourced — everything else stays the same.
+//
+// `src` accepts either:
+//   - an imported local asset (`import heroImg from "../../assets/images/hero.jpg"`)
+//     → runs through Astro's build-time image pipeline (resize/format/CLS-safe dimensions)
+//   - a plain string (a `public/` path or external URL) → rendered as a plain <img>
+interface Props {
+  src?: ImageMetadata | string;
+  alt: string;
+  placeholderLabel?: string;
+  duotoneColor?: string;
+  duotoneOpacity?: number;
+  radius?: string;
+  caption?: string;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "auto";
+  /** Output size for locally-imported assets — defaults to the source's native size (no upscaling). */
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  placeholderLabel,
+  duotoneColor = "#2a3a28",
+  duotoneOpacity = 0.22,
+  radius = "3px",
+  caption,
+  loading = "lazy",
+  fetchpriority = "auto",
+  width,
+  height,
+  class: className = "",
+} = Astro.props;
+---
+
+<div
+  class:list={["relative overflow-hidden", className]}
+  style={`border-radius:${radius}`}
+>
+  {
+    src && typeof src !== "string" ? (
+      <Image
+        src={src}
+        alt={alt}
+        width={width ?? src.width}
+        height={height ?? src.height}
+        loading={loading}
+        fetchpriority={fetchpriority}
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    ) : src ? (
+      <img
+        src={src}
+        alt={alt}
+        loading={loading}
+        fetchpriority={fetchpriority}
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    ) : (
+      <div class="absolute inset-0 flex items-center justify-center border border-dashed border-border bg-warm-alt px-3 text-center">
+        <span class="text-legal font-body text-text-muted">
+          {placeholderLabel || alt || "Photo placeholder"}
+        </span>
+      </div>
+    )
+  }
+  <div
+    class="pointer-events-none absolute inset-0"
+    style={`background:${duotoneColor};mix-blend-mode:color;opacity:${duotoneOpacity}`}
+  />
+  {
+    caption && (
+      <div
+        class="text-caption pointer-events-none absolute bottom-[18px] left-[20px] text-[rgba(251,248,241,.9)]"
+        style="text-shadow:0 1px 8px rgba(0,0,0,.5)"
+      >
+        {caption}
+      </div>
+    )
+  }
+</div>

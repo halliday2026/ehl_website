@@ -1,0 +1,49 @@
+name: Deploy client-review preview to GitHub Pages
+
+# Completely separate from deploy.yml (which pushes to production Hostway
+# over FTPS). This workflow only ever touches GitHub's own Pages
+# infrastructure — it cannot reach the live site.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-preview
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build (GitHub Pages target — served from a /ehl_website subpath)
+        run: npm run build
+        env:
+          BUILD_TARGET: gh-pages
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  /* Breakpoints */
+  --breakpoint-tablet: 900px; /* "what we do" grid, "from the field" stack point per design spec */
+
+  /* Colors */
+  --color-paper: #fbf8f1;
+  --color-warm-alt: #f4efe4;
+  --color-deep-green: #20342a;
+  --color-footer-green: #16241c;
+  --color-duotone-green: #2a3a28;
+  --color-poppy: #e0682f;
+
+  --color-text-primary: #1c2620;
+  --color-text-quote: #2b352d;
+  --color-text-secondary: #4a5249;
+  --color-text-muted: #6b7363;
+
+  --color-ochre: #a07b3c;
+  --color-ochre-on-dark: rgba(224, 164, 92, 0.9);
+  --color-cream-eyebrow: rgba(244, 222, 176, 0.95);
+
+  --color-border: #c9c2af;
+  --color-divider-dark: rgba(244, 239, 228, 0.14);
+
+  /* Fonts */
+  --font-display: "Spectral", ui-serif, Georgia, serif;
+  --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  /* Radii — deliberately sharp, keep it */
+  --radius-btn: 2px;
+  --radius-img: 3px;
+  --radius-bar: 6px;
+
+  /* Shadows */
+  --shadow-sticky-bar: 0 8px 28px rgba(0, 0, 0, 0.3);
+}
+
+/* ------------------------------------------------------------------ */
+/* Typography primitives                                              */
+/* Desktop values from the design spec; H1 clamps down for mobile.    */
+/* Not Tailwind utilities — these compose several properties at once  */
+/* (size + line-height + tracking + font), which reads clearer as     */
+/* named classes than long arbitrary-value utility chains per element.*/
+/* ------------------------------------------------------------------ */
+
+.text-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.375rem, 1.6rem + 3.5vw, 4.125rem); /* 38px -> 66px */
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+}
+
+.text-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 1.45rem + 1.35vw, 2.625rem); /* 28px -> 42px */
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+}
+
+.text-h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.1875rem, 1.1rem + 0.4vw, 1.5rem); /* 19px -> 24px */
+  line-height: 1.25;
+}
+
+.text-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.3125rem, 1.15rem + 0.75vw, 2.125rem); /* 21px -> 34px */
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+}
+
+.text-lede {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.93rem + 0.3vw, 1.3125rem); /* 16px -> 21px */
+  line-height: 1.55;
+}
+
+.text-eyebrow {
+  font-size: 0.75rem; /* 12px mobile */
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+@media (min-width: 900px) {
+  .text-eyebrow {
+    font-size: 0.8125rem; /* 13px desktop */
+  }
+}
+
+.text-caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.4;
+}
+
+.text-legal {
+  font-size: 0.78125rem; /* 12.5px */
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------ */
+/* Interaction primitives                                             */
+/* ------------------------------------------------------------------ */
+
+.btn {
+  transition:
+    filter 0.15s ease,
+    transform 0.2s ease;
+}
+.btn:hover {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+.text-link {
+  transition: opacity 0.15s ease;
+}
+.text-link:hover {
+  opacity: 0.68;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-poppy);
+  outline-offset: 2px;
+}
+
+/* Scroll-reveal: JS adds/removes this once matchMedia allows motion. */
+/* Default (no JS, or reduced motion) = fully visible, never opacity:0 in markup. */
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+[data-reveal="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+}

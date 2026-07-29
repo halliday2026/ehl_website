@@ -1,0 +1,18 @@
+---
+interface Props {
+  tone?: "ochre" | "ochre-on-dark" | "cream-on-photo";
+  class?: string;
+}
+
+const { tone = "ochre", class: className = "" } = Astro.props;
+
+const toneClasses: Record<string, string> = {
+  ochre: "text-ochre",
+  "ochre-on-dark": "text-ochre-on-dark",
+  "cream-on-photo": "text-cream-eyebrow",
+};
+---
+
+<div class:list={["text-eyebrow font-body", toneClasses[tone], className]}>
+  <slot />
+</div>

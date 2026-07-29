@@ -1,0 +1,27 @@
+---
+import Button from "./ui/Button.astro";
+import { DONATE_URL } from "../lib/config";
+---
+
+<div
+  data-donate-bar
+  class:list={[
+    "fixed inset-x-[10px] bottom-[10px] z-40 flex items-center gap-[10px] rounded-bar bg-[rgba(22,36,28,.92)] px-3 py-[10px] shadow-sticky-bar backdrop-blur-[8px] md:hidden",
+    "translate-y-[130%] opacity-0 motion-safe:transition-[transform,opacity] motion-safe:duration-[350ms] motion-safe:ease-[cubic-bezier(.2,.7,.2,1)]",
+  ]}
+  style="padding-bottom: calc(10px + env(safe-area-inset-bottom))"
+>
+  <div class="flex-1 font-body text-[13px] leading-tight font-medium text-warm-alt">
+    Keep Southern California wild
+  </div>
+  <Button
+    href={DONATE_URL}
+    external
+    size="sm"
+    class="!min-h-0 !rounded-bar !px-[24px] !py-[12px] !text-[14.5px]"
+  >
+    Donate
+  </Button>
+</div>
+
+<script src="../scripts/sticky-donate-bar.ts"></script>

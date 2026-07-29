@@ -1,0 +1,62 @@
+---
+import Eyebrow from "../ui/Eyebrow.astro";
+import DuotoneImage from "../ui/DuotoneImage.astro";
+import coastalSageScrubImg from "../../assets/images/css-vista3.webp";
+import chaparralFoothillsImg from "../../assets/images/deer.webp";
+import oakWoodlandImg from "../../assets/images/tejon-ranch.webp";
+
+const projects = [
+  {
+    title: "Coastal Sage Scrub Corridors",
+    county: "San Diego County",
+    src: coastalSageScrubImg,
+    alt: "A wide view of coastal sage scrub hills in San Diego County",
+  },
+  {
+    title: "Chaparral & Foothills",
+    county: "Riverside · San Bernardino",
+    src: chaparralFoothillsImg,
+    alt: "A mule deer among boulders in chaparral foothill terrain",
+  },
+  {
+    title: "Oak Woodland Reserves",
+    county: "Inland valleys",
+    src: oakWoodlandImg,
+    alt: "A frost-covered oak tree on protected grassland at Tejon Ranch",
+    mobileHidden: true, // design spec: mobile shows 2 of 3 project cards
+  },
+];
+---
+
+<section
+  class="bg-deep-green px-5 pt-11 pb-11 text-warm-alt tablet:px-14 tablet:pt-[88px] tablet:pb-[92px]"
+>
+  <div data-reveal class="mb-6 max-w-[680px] tablet:mb-[46px]">
+    <Eyebrow tone="ochre-on-dark">Projects &amp; impact</Eyebrow>
+    <h2 class="text-h2 mt-2.5 tablet:mt-3.5">From the coast to the foothills</h2>
+    <p class="text-lede mt-2.5 text-[rgba(244,239,228,.82)] tablet:mt-4">
+      We hold land in permanent trust and keep the region's wildlife
+      corridors connected — across counties, watersheds, and the working
+      landscapes in between.
+    </p>
+  </div>
+  <div class="flex flex-col gap-5 tablet:grid tablet:grid-cols-3 tablet:gap-[30px]">
+    {
+      projects.map((project) => (
+        <div data-reveal class:list={[project.mobileHidden ? "hidden tablet:block" : ""]}>
+          <DuotoneImage
+            src={project.src}
+            alt={project.alt}
+            duotoneColor="#20342a"
+            duotoneOpacity={0.2}
+            class="h-[154px] tablet:h-[212px]"
+          />
+          <h3 class="text-h3 mt-3 tablet:mt-[18px]">{project.title}</h3>
+          <div class="mt-1.5 text-[11.5px] font-semibold tracking-[.14em] text-ochre-on-dark uppercase tablet:mt-2 tablet:text-[12.5px]">
+            {project.county}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label = "Content coming soon" } = Astro.props;
+---
+
+<div class="mx-5 mb-16 rounded-btn border border-dashed border-border bg-warm-alt px-5 py-4 tablet:mx-14 tablet:px-6 tablet:py-5">
+  <p class="text-legal font-body font-semibold tracking-[.08em] text-ochre uppercase">
+    {label}
+  </p>
+  <div class="mt-2 text-[14px] leading-relaxed text-text-secondary tablet:text-[15px]">
+    <slot />
+  </div>
+</div>

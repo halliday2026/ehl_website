@@ -1,0 +1,53 @@
+---
+interface Props {
+  href?: string;
+  type?: "button" | "submit";
+  variant?: "primary" | "dark";
+  size?: "sm" | "md" | "lg";
+  block?: boolean;
+  external?: boolean;
+  class?: string;
+  style?: string;
+}
+
+const {
+  href,
+  type = "button",
+  variant = "primary",
+  size = "md",
+  block = false,
+  external = false,
+  class: className = "",
+  style,
+} = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  primary: "bg-poppy text-white",
+  dark: "bg-deep-green text-paper",
+};
+
+const sizeClasses: Record<string, string> = {
+  sm: "py-[11px] px-[23px] text-[15px]",
+  md: "py-[13px] px-[26px] text-[15px]",
+  lg: "py-[17px] px-[34px] text-base",
+};
+
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  href={href}
+  type={!href ? type : undefined}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  style={style}
+  class:list={[
+    "btn inline-flex min-h-[44px] items-center justify-center rounded-btn font-body font-semibold no-underline",
+    variantClasses[variant],
+    sizeClasses[size],
+    block ? "flex w-full" : "",
+    className,
+  ]}
+>
+  <slot />
+</Tag>

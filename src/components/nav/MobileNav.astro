@@ -1,0 +1,42 @@
+---
+import Button from "../ui/Button.astro";
+import { PRIMARY_NAV } from "../../lib/nav";
+import { DONATE_URL } from "../../lib/config";
+import { withBase } from "../../lib/url";
+---
+
+<div
+  id="mobile-nav-panel"
+  data-mobile-nav-panel
+  hidden
+  class="fixed inset-0 z-30 flex flex-col overflow-y-auto bg-deep-green px-6 py-6 tablet:hidden"
+>
+  <div class="flex items-center justify-between">
+    <span class="font-display text-lg font-semibold text-paper">Menu</span>
+    <button
+      type="button"
+      data-mobile-nav-close
+      class="flex h-11 w-11 items-center justify-center text-paper"
+    >
+      <span class="sr-only">Close menu</span>
+      <span aria-hidden="true" class="text-2xl leading-none">&times;</span>
+    </button>
+  </div>
+  <nav aria-label="Mobile" class="mt-10 flex flex-col gap-1">
+    {
+      PRIMARY_NAV.map((link) => (
+        <a
+          href={withBase(link.href)}
+          class="text-link flex min-h-[44px] items-center border-b border-divider-dark py-3 font-body text-lg text-paper"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+  <div class="mt-8">
+    <Button href={DONATE_URL} external block size="lg">Donate</Button>
+  </div>
+</div>
+
+<script src="../../scripts/mobile-nav.ts"></script>

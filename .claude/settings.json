@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "deny": [
+      "Write(web.config)",
+      "Edit(web.config)",
+      "Write(/news/**)",
+      "Edit(/news/**)",
+      "Write(/bin/**)",
+      "Edit(/bin/**)",
+      "Write(/App_Data/**)",
+      "Edit(/App_Data/**)",
+      "Write(/App_GlobalResources/**)",
+      "Edit(/App_GlobalResources/**)",
+      "Write(Global.asax)",
+      "Edit(Global.asax)",
+      "Write(involved.aspx)",
+      "Edit(involved.aspx)"
+    ]
+  }
+}
