@@ -52,9 +52,12 @@ export const FOOTER_NAV: FooterColumn[] = [
   {
     heading: "Land Trust",
     links: [
+      // "Our Preserves" / "Stewardship" removed: carried over from the
+      // original design mockup, but there's no distinct content for either
+      // (on this site or the legacy one) to actually link to — see prior
+      // conversation. Revisit if the client provides real preserve-listing
+      // or stewardship-practices content later.
       { label: "EH Conservancy", href: "/land-trust/" },
-      { label: "Our Preserves", href: "/land-trust/" },
-      { label: "Stewardship", href: "/land-trust/" },
     ],
   },
 ];
