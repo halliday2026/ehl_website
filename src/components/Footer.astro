@@ -25,7 +25,12 @@ import { withBase } from "../lib/url";
           <div>
             <div class="mb-1.5 font-semibold text-paper">{column.heading}</div>
             {column.links.map((link) => (
-              <a href={withBase(link.href)} class="text-link block py-0.5 no-underline">
+              <a
+                href={link.external ? link.href : withBase(link.href)}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                class="text-link block py-0.5 no-underline"
+              >
                 {link.label}
               </a>
             ))}

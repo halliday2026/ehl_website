@@ -1,6 +1,9 @@
+import { DONATE_URL } from "./config";
+
 export interface NavLink {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 /** Primary nav — used by SiteNav (desktop) and MobileNav. */
@@ -30,18 +33,19 @@ export const FOOTER_NAV: FooterColumn[] = [
   {
     heading: "What We Do",
     links: [
-      { label: "Saving Nature", href: "/what-we-do/" },
-      { label: "Strategic Planning", href: "/what-we-do/" },
-      { label: "Collaboration", href: "/what-we-do/" },
+      { label: "Saving Nature", href: "/what-we-do/#saving-nature" },
+      { label: "Strategic Planning", href: "/what-we-do/#strategic-planning" },
+      { label: "Collaboration", href: "/what-we-do/#collaboration" },
       { label: "Land Trust", href: "/land-trust/" },
     ],
   },
   {
     heading: "Get Involved",
     links: [
-      { label: "Donate", href: "/get-involved/" },
+      // Donate always uses DONATE_URL directly (never a route) — see CLAUDE.md.
+      { label: "Donate", href: DONATE_URL, external: true },
       { label: "Volunteer", href: "/get-involved/" },
-      { label: "Newsletter", href: "/get-involved/" },
+      { label: "Newsletter", href: "/get-involved/#newsletter" },
       { label: "Events", href: "/get-involved/" },
     ],
   },
