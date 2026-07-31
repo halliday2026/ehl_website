@@ -37,6 +37,7 @@ export const FOOTER_NAV: FooterColumn[] = [
       { label: "Strategic Planning", href: "/what-we-do/#strategic-planning" },
       { label: "Collaboration", href: "/what-we-do/#collaboration" },
       { label: "Land Trust", href: "/land-trust/" },
+      { label: "Projects", href: "/projects/" },
     ],
   },
   {
