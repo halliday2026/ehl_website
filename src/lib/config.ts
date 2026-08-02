@@ -7,11 +7,13 @@ export const SITE = {
 } as const;
 
 /**
- * TODO(EHL): confirm final donation platform URL (modern hosted PayPal
- * donation page, per brief). Do not deploy with this placeholder — every
- * Donate button on the site links here.
+ * PayPal's return/cancel URLs on this button still point at the legacy
+ * site — must be updated in the PayPal dashboard to the new site at
+ * cutover, or donors get redirected to a dead page after completing a
+ * donation. Tracked in docs/LAUNCH_CHECKLIST.md.
  */
-export const DONATE_URL = "https://TODO-EHL-donate-url.example";
+export const DONATE_URL =
+  "https://www.paypal.com/donate/?hosted_button_id=J3JALMAXU6E28";
 
 export const FORMSPREE = {
   /** TODO(EHL): Formspree form ID for homepage/get-involved newsletter signup, e.g. https://formspree.io/f/XXXXXXX */
