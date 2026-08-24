@@ -48,6 +48,14 @@ enable `dangerous-clean-slate`** — it would wipe the ASP.NET files, which
 aren't in this repo and can't be restored from git. The `exclude` list is the
 other half of that protection; don't remove entries from it.
 
+## Launch checklist
+
+`docs/LAUNCH_CHECKLIST.md` tracks action items that must happen at cutover,
+not before (e.g. updating the PayPal donate button's return/cancel URLs in
+the PayPal dashboard, currently still pointed at the legacy site). Check it
+before any real production go-live, and add to it rather than letting
+cutover-only tasks get silently handled inline elsewhere.
+
 ## Client-review preview (GitHub Pages)
 
 `.github/workflows/deploy-preview.yml` deploys the same site to GitHub Pages
@@ -72,7 +80,10 @@ run can turn on itself.
 - **Forms** post to Formspree via `src/scripts/forms.ts` (client-side fetch,
   no server-side handling). Endpoint IDs live in `src/lib/config.ts`.
 - **Donate** is always the `DONATE_URL` constant in `src/lib/config.ts` —
-  never hardcode a donate link elsewhere.
+  never hardcode a donate link elsewhere. It's a PayPal **Hosted Donate
+  Button** URL (`paypal.com/donate/?hosted_button_id=...`), i.e. a plain
+  external redirect — deliberately not an embedded PayPal JS SDK button.
+  Don't reintroduce an embedded/SDK version without it being asked for.
 - **Never invent copy** for bracketed placeholders (`[ Street Address ]`,
   `[ Field story headline ]`, etc.) or unresolved config values — leave them
   clearly marked for the client to fill in. Comments use `TODO(EHL): ...`;
@@ -82,7 +93,25 @@ run can turn on itself.
   (`213-804-2750`) is a real value from the brief, not a placeholder — it
   still needs a currency check before launch, but don't treat it as unknown.
 
+## Client-provided copy
+
+The client sends real copy as Word docs (`.docx`), not plain text. The Read
+tool can't open them (binary). To extract: a `.docx` is a zip archive —
+unzip it and parse `word/document.xml`'s `w:t` text nodes for the body
+text. Read the XML with UTF-8 explicitly (not a default/ANSI codepage) or
+smart quotes and em-dashes come through as mojibake. When placing extracted
+copy into the site, use body/paragraph text only — skip the document's own
+heading/title paragraphs (the site has its own heading structure) and
+anything that's an image rather than real text; treat this content as
+authoritative over whatever placeholder or previously-mirrored text is
+already in the site.
+
 ## Development
 
 Start the dev server in background mode: `astro dev --background`. Manage it
-with `astro dev stop`, `astro dev status`, `astro dev logs`.
+with `astro dev stop`, `astro dev status`, `astro dev logs`. If `npm run dev`
+or `astro dev` refuses to start, claiming a server is already running,
+`.astro/dev.json`'s tracked PID may be stale (e.g. after an ungraceful
+close) — Astro trusts that file without verifying the PID is still actually
+the dev server. Run `astro dev stop` to clear it (or delete
+`.astro/dev.json` directly if `stop` doesn't clean it up) before retrying.
