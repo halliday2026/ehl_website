@@ -1,8 +1,8 @@
 ---
 import InteriorLayout from "../layouts/InteriorLayout.astro";
 import NewsletterForm from "../components/forms/NewsletterForm.astro";
-import TodoNotice from "../components/ui/TodoNotice.astro";
-import { FORMSPREE, NEWSLETTER } from "../lib/config";
+import Button from "../components/ui/Button.astro";
+import { FORMSPREE, NEWSLETTER, DONATE_URL } from "../lib/config";
 import heroImg from "../assets/images/rainbow.webp";
 
 const benefits = [
@@ -14,7 +14,7 @@ const benefits = [
 
 <InteriorLayout
   title="Get Involved"
-  description="Volunteer, give, and stay connected with the Endangered Habitats League's work protecting Southern California."
+  description="Give and stay connected with the Endangered Habitats League's work protecting Southern California."
   eyebrow="Get Involved"
   heading="You are invited"
   intro="To reach out and expand our conservation community, we want to share our work and engage a wide range of people in our campaign to save the natural world around us. Signing up means you support our mission and the credible, collaborative work we do to achieve it."
@@ -40,12 +40,48 @@ const benefits = [
       hand down our beautiful natural world to our children.
     </p>
 
+    <h2 id="support" class="text-h3 mt-10 text-text-primary">Support our work</h2>
+    <div class="mt-4 flex max-w-[560px] flex-col gap-4">
+      <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+        Your tax-deductible donation is a significant contribution toward the
+        preservation of the magnificent natural landscapes of Southern
+        California.
+      </p>
+      <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+        We need your support — it's that simple. Foundation grants provide
+        some funding for specific projects, but generally not for the
+        expenses of running the League itself. Funding is needed for the
+        basic costs of doing business — everything from travel, phone bills
+        and legal help to printing, postage, and insurance.
+      </p>
+      <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+        Your donations can help. No amount is too small. Your gifts
+        contribute to the preservation of wildlife habitat, the curbing of
+        urban sprawl, and the development and implementation of
+        environmentally friendly land use policies.
+      </p>
+      <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+        Your donations are processed through a secure network, including the
+        option to make your donations anonymously, or to do so in honor of
+        another. If you would like to join with our like-minded supporters
+        when making a donation, you will be given the option of providing
+        your contact information to receive EHL's newsletters and action
+        notices. In any event, EHL will not give your name or information to
+        anyone else, ever.
+      </p>
+      <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+        We thank you for your interest and consideration, and look forward
+        to sharing in this vital work with you.
+      </p>
+    </div>
+    <Button href={DONATE_URL} external class="mt-5">Donate</Button>
+
     <h2 id="newsletter" class="text-h3 mt-10 text-text-primary">Sign up for updates</h2>
     <div class="mt-5 max-w-[480px]">
       <NewsletterForm endpoint={FORMSPREE.joinUs} idPrefix="getinvolved-newsletter" />
     </div>
     <p class="mt-6 text-[14px] text-text-secondary">
-      Already a subscriber? Read the{" "}
+      Read the{" "}
       <a
         class="text-link border-b border-border pb-0.5 text-deep-green"
         href={NEWSLETTER.current}
@@ -61,9 +97,4 @@ const benefits = [
       </a>.
     </p>
   </div>
-  <TodoNotice label="TODO(EHL): volunteer + events content">
-    The legacy site's "Join Us" page only covered the newsletter signup —
-    dedicated volunteer opportunities and an events calendar aren't mirrored
-    from anywhere and will need real content from the client.
-  </TodoNotice>
 </InteriorLayout>

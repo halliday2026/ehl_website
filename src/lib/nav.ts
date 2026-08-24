@@ -26,7 +26,6 @@ export const FOOTER_NAV: FooterColumn[] = [
     links: [
       { label: "Our Mission", href: "/about/" },
       { label: "Board & Staff", href: "/about/" },
-      { label: "Financials", href: "/about/" },
       { label: "Contact", href: "/contact/" },
     ],
   },
@@ -45,9 +44,7 @@ export const FOOTER_NAV: FooterColumn[] = [
     links: [
       // Donate always uses DONATE_URL directly (never a route) — see CLAUDE.md.
       { label: "Donate", href: DONATE_URL, external: true },
-      { label: "Volunteer", href: "/get-involved/" },
       { label: "Newsletter", href: "/get-involved/#newsletter" },
-      { label: "Events", href: "/get-involved/" },
     ],
   },
   {

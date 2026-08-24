@@ -1,7 +1,80 @@
 ---
 import InteriorLayout from "../layouts/InteriorLayout.astro";
-import TodoNotice from "../components/ui/TodoNotice.astro";
 import heroImg from "../assets/images/290th-street-april.webp";
+
+const visionPoints = [
+  "Secure, intact native landscapes where abundant wildlife thrives",
+  "Sustainable human communities with a high quality of life for everyone",
+  "Rural and agricultural lands saved from sprawl",
+];
+
+const board = [
+  {
+    name: "Dan Silver, MD",
+    role: "Chief Executive Officer",
+    occupation: "Physician",
+    bio: "A physician, Dan was born in Los Angeles and attended the University of California at Berkeley and Columbia University College of Physicians and Surgeons, and is now retired. In 1989, Dan led the effort to preserve the Santa Rosa Plateau in Riverside County. With EHL since its inception in 1991, Dan saw the organization emerge as a regional leader in conservation and growth management. On behalf of EHL, he accepted the 1995 David Gaines Award from the Planning and Conservation League. In 2004, the American Planning Association California Chapter honored Dan with its Outstanding Distinguished Leadership: Layperson Award.",
+  },
+  {
+    name: "Jess Morton",
+    role: "Chief Financial Officer",
+    occupation: "Accountant & Tax Preparer",
+    bio: "Jess is a tax preparer for small businesses by profession, with intense interests and accomplishments in natural history, poetry, and music. He is responsible for EHL's fiscal matters as well as for those projects for which EHL serves as fiscal agent. Other responsibilities include the Palos Verdes Peninsula Natural Community Conservation Plan. As a volunteer, Jess put together the award-winning Audubon YES! program, which provides hands-on environmental volunteer opportunities for students. He received the National Audubon Society's 1996 Charles H. Callison Award in recognition of his work.",
+  },
+  {
+    name: "Jane Block",
+    role: null,
+    occupation: "Businesswoman",
+    bio: "Jane is a civic leader in Riverside County. She is President of the Riverside Land Conservancy whose recent accomplishments include assembling a new state park in San Timoteo Canyon. Prior to working with the RLC, Jane was active in establishing the Box Springs Mountain Park and the Sycamore Canyon Park, and in expanding the Santa Rosa Plateau Preserve and the North San Jacinto Wildlife Area. She is an advisory committee member for the University of California Riverside Center for Conservation Biology and the UCR Center for Sustainable Development, and the Riverside County Regional Conservation Authority. She is also active on issues concerning women and children. In 1994 she received the Southern California Association of Governments Donald G. Hagman Regional Citizen Award.",
+  },
+  {
+    name: "Michael Beck",
+    role: null,
+    occupation: "Conservationist",
+    bio: "A graduate of the University of California at Riverside, Michael is also a professional craftsman of hand-made furniture. Appointed to the San Diego County Planning Commission in 1988, and serving for 28 years, Michael led the adoption of the San Diego Multiple Species Conservation Program. Among numerous honors, he has been State Planning Commissioner of the Year, winner of the San Diego Mediation Center's Peacemaker Award, and recipient of the prestigious, nation-wide Alexander Calder Prize, given for establishing business-conservation partnerships. From 1996-2001, he was an Instructor at University of California Extension. A member of numerous advisory committees, he plays a key role in the San Diego Association of Governments' “Transnet” transportation and environmental mitigation program.",
+  },
+  {
+    name: "Pete DeSimone",
+    role: null,
+    occupation: "Preserve Manager",
+    bio: "Pete is Director of Sanctuaries and Stewardship for Audubon California and Manager of Audubon's 4,000-acre Starr Ranch Sanctuary in the foothills of Orange County — a resource of immense ecological value. Pete also serves as National Audubon Society's representative on many local and state matters, and is a member of the Audubon task force on habitat plans under the Endangered Species Act. He has a B.S. in Wildlife Management from the University of Maine and has conducted research on birds of prey for the last 15 years.",
+  },
+  {
+    name: "Karen Messer, Ph.D.",
+    role: null,
+    occupation: "Professor of Mathematics",
+    bio: "Karen is a professor of mathematics at California State University Fullerton and a member of the Division of Biostatistics at Moores UCSD Cancer Center. As a statistician, she works frequently with field biologists, and is active in the design and analysis of California gnatcatcher monitoring projects. Karen has been a board member of Audubon California and Buena Vista Audubon Society, and is married to landscape photographer Robert Turner. She is active in land use planning issues, including serving on an advisory group for the County of San Diego General Plan “2020” Update.",
+  },
+  {
+    name: "Evi Meyer",
+    role: null,
+    occupation: "Educator",
+    bio: "Evi Meyer is a conservationist, educator, and author. With a Master's Degree in biology, she served as part-time educator at the Cabrillo Marine Aquarium for 17 years. She has also volunteered in the Palos Verdes Peninsula Land Conservancy's third-grade education program. Evi is an accomplished birder and photographer. Her book, “A Bravo for Charlie,” is a photographic study of a Cactus Wren family.",
+  },
+];
+
+const staff = [
+  {
+    name: "Dan Silver",
+    role: "Executive Director",
+    bio: "Dan (see above) manages the organization. He is also primarily responsible for EHL's program work at the state level and in Los Angeles, Riverside, San Bernardino, and Orange Counties.",
+  },
+  {
+    name: "Jess Morton",
+    role: "Treasurer",
+    bio: "Jess (see above) cares for EHL's accounting needs and manages its funds.",
+  },
+  {
+    name: "Michael Beck",
+    role: "San Diego Director",
+    bio: "Michael (see above) directs our array of programs and projects in San Diego County. He also leads EHL's sister land trust, Endangered Habitats Conservancy.",
+  },
+  {
+    name: "Scott Grimes",
+    role: "Program Officer",
+    bio: "Chief Financial Officer of Endangered Habitats Conservancy, Scott also assists EHL with policy analysis, fundraising, land conservation, and capacity-building activities. The former Director of Research and Program Development for San Diego Dialogue, he worked in close collaboration with EHL on the successful development of the Environmental Mitigation Program for San Diego County's Measure A ballot initiative. Scott also has extensive experience in nonprofit fundraising and resource development strategies. He is the author of three books, as well as several reports, book chapters and papers on policy issues related to urbanization, land conservation and regionalism.",
+  },
+];
 ---
 
 <InteriorLayout
@@ -10,12 +83,82 @@ import heroImg from "../assets/images/290th-street-april.webp";
   eyebrow="About"
   heading="Our Mission"
   heroImage={heroImg}
-  intro="The Endangered Habitats League is a 501(c)(3) nonprofit organization dedicated to ecosystem protection and sustainable land use. Southern California possesses a rich and irreplaceable natural heritage, and EHL works through participation in community and regional planning processes, and collaboration with other stakeholders, to craft solutions that serve the needs of all area residents and preserve our native landscapes."
+  intro="Endangered Habitats League (EHL) is a 501(c)(3) non-profit organization dedicated to ecosystem protection and sustainable land use. Founded in 1991, our first project was to protect the vanishing coastal sage scrub of Southern California by securing an endangered species listing for a small, resident songbird, the California gnatcatcher. EHL has since worked to create comprehensive habitat reserves to save the natural heritage of this unique region. Our staff of seasoned professionals works in a variety of ways. Through participation in community and regional planning processes, collaboration with other stakeholders, and land acquisition, we develop solutions that serve the needs of all area residents and preserve our native landscapes."
 >
-  <TodoNotice label="TODO(EHL): board, staff, and financials">
-    The legacy About page doesn't include board/staff bios or financial
-    disclosures as text content — those will need to come from the client
-    directly (staff bios, current board roster, and financial statements or
-    a Form 990 link) rather than being mirrored from the old site.
-  </TodoNotice>
+  <div class="flex flex-col gap-12 px-5 pb-16 tablet:gap-16 tablet:px-14">
+    <section id="vision">
+      <h2 class="text-h2 text-text-primary">Our Vision</h2>
+      <p class="text-lede mt-3 max-w-[720px] text-text-quote">
+        EHL action leads the way to making a better future for all of
+        Southern California's inhabitants:
+      </p>
+      <ul class="mt-4 flex max-w-[560px] flex-col gap-3">
+        {
+          visionPoints.map((point) => (
+            <li class="flex gap-3 text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+              <span class="text-poppy" aria-hidden="true">
+                —
+              </span>
+              <span>{point}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+        &hellip; A vision in which our natural heritage is preserved for our
+        enjoyment and enrichment, as a home for wildlife, and as a legacy for
+        our children and the generations to come.
+      </p>
+      <p class="mt-4 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+        Please join us in this vital work.
+      </p>
+    </section>
+
+    <section id="board">
+      <h2 class="text-h2 text-text-primary">Board of Directors</h2>
+      <p class="text-lede mt-3 max-w-[720px] text-text-quote">
+        The Endangered Habitats League operates under the careful direction
+        of our Board of Directors, an experienced group of seven
+        professional men and women who are dedicated to the preservation of
+        our natural heritage.
+      </p>
+      <div class="mt-6 flex max-w-[720px] flex-col gap-6">
+        {
+          board.map((person) => (
+            <div class="border-b border-border pb-6 last:border-b-0">
+              <div class="font-display text-[18px] font-semibold text-text-primary">
+                {person.name}
+                {person.role && (
+                  <span class="text-text-secondary"> — {person.role}</span>
+                )}
+              </div>
+              <div class="text-eyebrow mt-1 text-ochre">{person.occupation}</div>
+              <p class="mt-2 text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+                {person.bio}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="staff">
+      <h2 class="text-h2 text-text-primary">EHL Staff</h2>
+      <div class="mt-6 flex max-w-[720px] flex-col gap-6">
+        {
+          staff.map((person) => (
+            <div class="border-b border-border pb-6 last:border-b-0">
+              <div class="font-display text-[18px] font-semibold text-text-primary">
+                {person.name}
+              </div>
+              <div class="text-eyebrow mt-1 text-ochre">{person.role}</div>
+              <p class="mt-2 text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+                {person.bio}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 </InteriorLayout>
