@@ -1,19 +1,49 @@
+---
+import DuotoneImage from "../ui/DuotoneImage.astro";
+import { withBase } from "../../lib/url";
+import galleryTeaserImg from "../../assets/images/cactus-flower.webp";
+---
+
 <section
   data-reveal
-  class="bg-paper px-5 pt-12 pb-11 tablet:grid tablet:grid-cols-[120px_1fr] tablet:px-14 tablet:pt-24 tablet:pb-[88px]"
+  class="bg-paper px-5 pt-12 pb-11 tablet:px-14 tablet:pt-24 tablet:pb-[88px]"
 >
   <div
-    class="font-display text-[64px] leading-[.5] font-medium text-poppy tablet:text-[120px] tablet:leading-[.7]"
+    class="flex flex-col gap-8 tablet:grid tablet:grid-cols-[280px_120px_1fr] tablet:items-center tablet:gap-10"
   >
-    &ldquo;
-  </div>
-  <blockquote class="mt-3.5 max-w-[880px] tablet:mt-0">
-    <p class="text-quote text-text-quote">
-      For the benefit of all the region's inhabitants — the wildlife that
-      lives here, and the people who call this landscape home.
-    </p>
-    <div class="text-eyebrow mt-4 text-ochre tablet:mt-[22px]">
-      From our mission
+    <a
+      href={withBase("/gallery/")}
+      class="group relative block h-[160px] overflow-hidden rounded-img tablet:order-1 tablet:h-[240px]"
+    >
+      <DuotoneImage
+        src={galleryTeaserImg}
+        alt=""
+        duotoneColor="#20342a"
+        duotoneOpacity={0.55}
+        class="h-full w-full transition duration-300 group-hover:scale-105"
+      />
+      <span class="pointer-events-none absolute inset-0 bg-deep-green/60" />
+      <span
+        class="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center font-display text-lg font-semibold text-paper [text-wrap:balance]"
+        style="text-shadow:0 1px 10px rgba(0,0,0,.6)"
+      >
+        See our image gallery &rarr;
+      </span>
+    </a>
+
+    <div
+      class="font-display text-[64px] leading-[.5] font-medium text-poppy tablet:order-2 tablet:text-[120px] tablet:leading-[.7]"
+    >
+      &ldquo;
     </div>
-  </blockquote>
+    <blockquote class="max-w-[880px] tablet:order-3">
+      <p class="text-quote text-text-quote">
+        For the benefit of all the region's inhabitants — the wildlife that
+        lives here, and the people who call this landscape home.
+      </p>
+      <div class="text-eyebrow mt-4 text-ochre tablet:mt-[22px]">
+        From our mission
+      </div>
+    </blockquote>
+  </div>
 </section>

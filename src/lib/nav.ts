@@ -26,6 +26,7 @@ export const FOOTER_NAV: FooterColumn[] = [
     links: [
       { label: "Our Mission", href: "/about/" },
       { label: "Board & Staff", href: "/about/" },
+      { label: "Gallery", href: "/gallery/" },
       { label: "Contact", href: "/contact/" },
     ],
   },

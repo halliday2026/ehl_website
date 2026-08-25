@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import InteriorLayout from "../layouts/InteriorLayout.astro";
+import cactusWrensImg from "../assets/images/cactus-wrens.webp";
+import cactusFlowerImg from "../assets/images/cactus-flower.webp";
+import elSegundoBlueImg from "../assets/images/el-segundo-blue.webp";
+import kangarooRatImg from "../assets/images/mouse.webp";
+import snowyPloverImg from "../assets/images/snowy-plover.webp";
+import wildOatsImg from "../assets/images/wild-oats.webp";
+import ceonothusImg from "../assets/images/ceonothus.webp";
+import lillyImg from "../assets/images/lilly.webp";
+import trabucoCanyonImg from "../assets/images/trabuco-canyon.webp";
+
+const photos = [
+  { src: cactusWrensImg, alt: "Two cactus wrens perched on a prickly pear cactus" },
+  { src: cactusFlowerImg, alt: "Blooming cholla cactus flowers" },
+  { src: elSegundoBlueImg, alt: "An El Segundo blue butterfly resting on buckwheat" },
+  { src: kangarooRatImg, alt: "A kangaroo rat emerging from its burrow in sandy habitat" },
+  { src: snowyPloverImg, alt: "A western snowy plover on a sandy beach" },
+  { src: wildOatsImg, alt: "Backlit wild oat seed heads on a dry hillside" },
+  { src: ceonothusImg, alt: "A flowering ceanothus, or California lilac, shrub" },
+  { src: lillyImg, alt: "A chocolate lily in bloom" },
+  { src: trabucoCanyonImg, alt: "A wooded stream in Trabuco Canyon" },
+];
+---
+
+<InteriorLayout
+  title="Gallery"
+  description="A closer look at the plants, wildlife, and landscapes the Endangered Habitats League works to protect across Southern California."
+  eyebrow="Gallery"
+  heading="Wildlife & wild places"
+  intro="A closer look at the plants, wildlife, and landscapes we work to protect across Southern California."
+>
+  <div class="grid grid-cols-2 gap-3 px-5 pb-16 tablet:grid-cols-3 tablet:gap-5 tablet:px-14">
+    {
+      photos.map((photo, i) => (
+        <button
+          type="button"
+          data-gallery-open={i}
+          class="group relative aspect-square overflow-hidden rounded-img"
+          aria-label={`View larger photo: ${photo.alt}`}
+        >
+          <Image
+            src={photo.src}
+            alt=""
+            width={480}
+            loading={i < 6 ? "eager" : "lazy"}
+            class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+          />
+        </button>
+      ))
+    }
+  </div>
+
+  <dialog
+    id="gallery-lightbox"
+    data-gallery-lightbox
+    aria-label="Photo gallery"
+    class="m-auto max-h-[90vh] w-[92vw] max-w-[1100px] overflow-hidden rounded-img border-0 bg-deep-green p-0 backdrop:bg-[rgba(20,26,20,.85)]"
+  >
+    <div class="relative flex max-h-[90vh] flex-col">
+      <button
+        type="button"
+        data-gallery-close
+        aria-label="Close"
+        class="absolute top-2 right-2 z-10 flex h-11 w-11 items-center justify-center text-2xl leading-none text-paper"
+      >
+        &times;
+      </button>
+      <button
+        type="button"
+        data-gallery-prev
+        aria-label="Previous photo"
+        class="absolute top-1/2 left-2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-3xl leading-none text-paper"
+      >
+        &lsaquo;
+      </button>
+      <button
+        type="button"
+        data-gallery-next
+        aria-label="Next photo"
+        class="absolute top-1/2 right-2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-3xl leading-none text-paper"
+      >
+        &rsaquo;
+      </button>
+      {
+        photos.map((photo, i) => (
+          <figure data-gallery-slide={i} hidden class="m-0 flex flex-col items-center">
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              width={1400}
+              loading="lazy"
+              class="max-h-[75vh] w-auto object-contain"
+            />
+            <figcaption class="px-6 py-4 text-center text-[14px] text-paper">
+              {photo.alt}
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </dialog>
+
+  <script src="../scripts/gallery-lightbox.ts"></script>
+</InteriorLayout>
