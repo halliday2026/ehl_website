@@ -31,7 +31,7 @@ const photos = [
   heading="Wildlife & wild places"
   intro="A closer look at the plants, wildlife, and landscapes we work to protect across Southern California."
 >
-  <div class="grid grid-cols-2 gap-3 px-5 pb-16 tablet:grid-cols-3 tablet:gap-5 tablet:px-14">
+  <div class="mx-auto grid max-w-[880px] grid-cols-2 gap-3 px-5 pb-16 tablet:grid-cols-3 tablet:gap-5 tablet:px-14">
     {
       photos.map((photo, i) => (
         <button
@@ -43,7 +43,8 @@ const photos = [
           <Image
             src={photo.src}
             alt=""
-            width={480}
+            width={Math.min(480, photo.src.width)}
+            densities={[1, 2]}
             loading={i < 6 ? "eager" : "lazy"}
             class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
           />
@@ -89,7 +90,8 @@ const photos = [
             <Image
               src={photo.src}
               alt={photo.alt}
-              width={1400}
+              width={Math.min(1400, photo.src.width)}
+              densities={[1, 2]}
               loading="lazy"
               class="max-h-[75vh] w-auto object-contain"
             />
