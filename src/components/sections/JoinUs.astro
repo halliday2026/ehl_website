@@ -1,5 +1,5 @@
 ---
-import NewsletterForm from "../forms/NewsletterForm.astro";
+import NewsletterModal from "../forms/NewsletterModal.astro";
 import { FORMSPREE } from "../../lib/config";
 ---
 
@@ -15,5 +15,5 @@ import { FORMSPREE } from "../../lib/config";
       our work, our preserves, and the ways you can help.
     </p>
   </div>
-  <NewsletterForm endpoint={FORMSPREE.joinUs} idPrefix="home-newsletter" />
+  <NewsletterModal endpoint={FORMSPREE.joinUs} idPrefix="home-newsletter" />
 </section>

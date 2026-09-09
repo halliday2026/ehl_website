@@ -12,43 +12,36 @@ const board = [
   {
     name: "Dan Silver, MD",
     role: "Chief Executive Officer",
-    occupation: "Physician",
     bio: "A physician, Dan was born in Los Angeles and attended the University of California at Berkeley and Columbia University College of Physicians and Surgeons, and is now retired. In 1989, Dan led the effort to preserve the Santa Rosa Plateau in Riverside County. With EHL since its inception in 1991, Dan saw the organization emerge as a regional leader in conservation and growth management. On behalf of EHL, he accepted the 1995 David Gaines Award from the Planning and Conservation League. In 2004, the American Planning Association California Chapter honored Dan with its Outstanding Distinguished Leadership: Layperson Award.",
   },
   {
     name: "Jess Morton",
     role: "Chief Financial Officer",
-    occupation: "Accountant & Tax Preparer",
-    bio: "Jess is a tax preparer for small businesses by profession, with intense interests and accomplishments in natural history, poetry, and music. He is responsible for EHL's fiscal matters as well as for those projects for which EHL serves as fiscal agent. Other responsibilities include the Palos Verdes Peninsula Natural Community Conservation Plan. As a volunteer, Jess put together the award-winning Audubon YES! program, which provides hands-on environmental volunteer opportunities for students. He received the National Audubon Society's 1996 Charles H. Callison Award in recognition of his work.",
+    bio: "Jess is an aerospace engineer and also tax preparer for small businesses, with intense interests and accomplishments in natural history, poetry, and music. He is responsible for EHL's fiscal matters as well as for those projects for which EHL serves as fiscal agent. Other responsibilities include the Palos Verdes Peninsula Natural Community Conservation Plan. As a volunteer, Jess put together the award-winning Audubon YES! program, which provides hands-on environmental volunteer opportunities for students. He received the National Audubon Society's 1996 Charles H. Callison Award in recognition of his work.",
   },
   {
     name: "Jane Block",
     role: null,
-    occupation: "Businesswoman",
     bio: "Jane is a civic leader in Riverside County. She is President of the Riverside Land Conservancy whose recent accomplishments include assembling a new state park in San Timoteo Canyon. Prior to working with the RLC, Jane was active in establishing the Box Springs Mountain Park and the Sycamore Canyon Park, and in expanding the Santa Rosa Plateau Preserve and the North San Jacinto Wildlife Area. She is an advisory committee member for the University of California Riverside Center for Conservation Biology and the UCR Center for Sustainable Development, and the Riverside County Regional Conservation Authority. She is also active on issues concerning women and children. In 1994 she received the Southern California Association of Governments Donald G. Hagman Regional Citizen Award.",
   },
   {
     name: "Michael Beck",
     role: null,
-    occupation: "Conservationist",
     bio: "A graduate of the University of California at Riverside, Michael is also a professional craftsman of hand-made furniture. Appointed to the San Diego County Planning Commission in 1988, and serving for 28 years, Michael led the adoption of the San Diego Multiple Species Conservation Program. Among numerous honors, he has been State Planning Commissioner of the Year, winner of the San Diego Mediation Center's Peacemaker Award, and recipient of the prestigious, nation-wide Alexander Calder Prize, given for establishing business-conservation partnerships. From 1996-2001, he was an Instructor at University of California Extension. A member of numerous advisory committees, he plays a key role in the San Diego Association of Governments' “Transnet” transportation and environmental mitigation program.",
   },
   {
     name: "Pete DeSimone",
     role: null,
-    occupation: "Preserve Manager",
     bio: "Pete is Director of Sanctuaries and Stewardship for Audubon California and Manager of Audubon's 4,000-acre Starr Ranch Sanctuary in the foothills of Orange County — a resource of immense ecological value. Pete also serves as National Audubon Society's representative on many local and state matters, and is a member of the Audubon task force on habitat plans under the Endangered Species Act. He has a B.S. in Wildlife Management from the University of Maine and has conducted research on birds of prey for the last 15 years.",
   },
   {
     name: "Karen Messer, Ph.D.",
     role: null,
-    occupation: "Professor of Mathematics",
     bio: "Karen is a professor of mathematics at California State University Fullerton and a member of the Division of Biostatistics at Moores UCSD Cancer Center. As a statistician, she works frequently with field biologists, and is active in the design and analysis of California gnatcatcher monitoring projects. Karen has been a board member of Audubon California and Buena Vista Audubon Society, and is married to landscape photographer Robert Turner. She is active in land use planning issues, including serving on an advisory group for the County of San Diego General Plan “2020” Update.",
   },
   {
     name: "Evi Meyer",
     role: null,
-    occupation: "Educator",
     bio: "Evi Meyer is a conservationist, educator, and author. With a Master's Degree in biology, she served as part-time educator at the Cabrillo Marine Aquarium for 17 years. She has also volunteered in the Palos Verdes Peninsula Land Conservancy's third-grade education program. Evi is an accomplished birder and photographer. Her book, “A Bravo for Charlie,” is a photographic study of a Cactus Wren family.",
   },
 ];
@@ -95,7 +88,7 @@ const staff = [
       <ul class="mt-4 flex max-w-[560px] flex-col gap-3">
         {
           visionPoints.map((point) => (
-            <li class="flex gap-3 text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
+            <li class="flex gap-3 text-[15px] leading-[1.6] text-text-secondary tablet:text-[16px]">
               <span class="text-poppy" aria-hidden="true">
                 —
               </span>
@@ -104,12 +97,12 @@ const staff = [
           ))
         }
       </ul>
-      <p class="mt-6 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+      <p class="mt-6 max-w-[720px] text-[16px] leading-[1.6] text-text-secondary">
         &hellip; A vision in which our natural heritage is preserved for our
         enjoyment and enrichment, as a home for wildlife, and as a legacy for
         our children and the generations to come.
       </p>
-      <p class="mt-4 max-w-[720px] text-[15px] leading-[1.6] text-text-secondary">
+      <p class="mt-4 max-w-[720px] text-[16px] leading-[1.6] text-text-secondary">
         Please join us in this vital work.
       </p>
     </section>
@@ -128,11 +121,10 @@ const staff = [
             <div class="border-b border-border pb-6 last:border-b-0">
               <div class="font-display text-[18px] font-semibold text-text-primary">
                 {person.name}
-                {person.role && (
-                  <span class="text-text-secondary"> — {person.role}</span>
-                )}
               </div>
-              <div class="text-eyebrow mt-1 text-ochre">{person.occupation}</div>
+              {person.role && (
+                <div class="text-eyebrow mt-1 text-ochre">{person.role}</div>
+              )}
               <p class="mt-2 text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
                 {person.bio}
               </p>

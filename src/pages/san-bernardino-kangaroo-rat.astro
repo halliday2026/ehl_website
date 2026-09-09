@@ -1,0 +1,28 @@
+---
+import InteriorLayout from "../layouts/InteriorLayout.astro";
+import fieldImg from "../assets/images/dbs-sbkr-a.webp";
+
+const paragraphs = [
+  "Native to Riverside and San Bernardino Counties, the San Bernardino kangaroo rat, or SBKR, is a gentle animal that emerges from its burrows at night to gather seeds and store them in its pouches. Its strong hind legs and jumping ability — like that of a kangaroo — keep it safe from predators. Due to development, the animal is hanging on in just three tenuous populations.",
+  "It didn't take long for Seven Oaks Dam, constructed in 2002 along the upper Santa Ana River, to potentially doom the single largest population. With natural water flows gone, it would only be a matter of time before this unique animal — adapted to periodic habitat renewal through flooding — disappeared.",
+  "In 2016, EHL initiated litigation against the Army Corps of Engineers and the flood districts operating the dam for not implementing mitigation measures. After collaborative settlement talks, we are now joined in partnership with the flood districts and also local water agencies for a multi-decade restoration below the dam. A Technical Committee is evaluating projects to remove non-native grasses, bring water to the historical floodplain, and rejuvenate the river for the kangaroo rat and rare plants.",
+  "This restoration will proceed incrementally, a few acres at a time. At the end, there will be hundreds of acres in various stages of vegetation maturity — just what the San Bernardino kangaroo rat needs. While it will take decades, there still is time, and we will make the most of it.",
+];
+---
+
+<InteriorLayout
+  title="Room to Jump: Saving the San Bernardino Kangaroo Rat"
+  description="The San Bernardino kangaroo rat is on the verge of extinction. Learn about how EHL is working to save it."
+  eyebrow="From the Field"
+  heading="Room to Jump: Saving the San Bernardino Kangaroo Rat"
+  intro="The San Bernardino kangaroo rat is on the verge of extinction. Learn about how EHL is working to save it."
+  heroImage={fieldImg}
+>
+  <div class="flex max-w-[720px] flex-col gap-4 px-5 pb-16 tablet:px-14">
+    {
+      paragraphs.map((p) => (
+        <p class="text-[15px] leading-[1.6] text-text-secondary">{p}</p>
+      ))
+    }
+  </div>
+</InteriorLayout>

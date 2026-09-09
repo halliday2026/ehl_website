@@ -1,6 +1,6 @@
 ---
 import InteriorLayout from "../layouts/InteriorLayout.astro";
-import NewsletterForm from "../components/forms/NewsletterForm.astro";
+import NewsletterModal from "../components/forms/NewsletterModal.astro";
 import Button from "../components/ui/Button.astro";
 import { FORMSPREE, NEWSLETTER, DONATE_URL } from "../lib/config";
 import heroImg from "../assets/images/rainbow.webp";
@@ -40,6 +40,26 @@ const benefits = [
       hand down our beautiful natural world to our children.
     </p>
 
+    <div class="mt-5">
+      <NewsletterModal endpoint={FORMSPREE.joinUs} idPrefix="getinvolved-newsletter" />
+    </div>
+    <p class="mt-6 text-[14px] text-text-secondary">
+      Read the{" "}
+      <a
+        class="text-link border-b border-border pb-0.5 text-deep-green"
+        href={NEWSLETTER.current}
+      >
+        current newsletter
+      </a>{" "}
+      or browse the{" "}
+      <a
+        class="text-link border-b border-border pb-0.5 text-deep-green"
+        href={NEWSLETTER.archive}
+      >
+        archive
+      </a>.
+    </p>
+
     <h2 id="support" class="text-h3 mt-10 text-text-primary">Support our work</h2>
     <div class="mt-4 flex max-w-[560px] flex-col gap-4">
       <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
@@ -48,11 +68,11 @@ const benefits = [
         California.
       </p>
       <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
-        We need your support — it's that simple. Foundation grants provide
-        some funding for specific projects, but generally not for the
-        expenses of running the League itself. Funding is needed for the
-        basic costs of doing business — everything from travel, phone bills
-        and legal help to printing, postage, and insurance.
+        We need your support — it's that simple. Funding is needed for
+        salaries, biological consultants, legal services, and the basic
+        costs of doing business — everything from travel and phone bills to
+        insurance. Fundraising expenses are less than one percent of our
+        budget.
       </p>
       <p class="text-[14px] leading-[1.6] text-text-secondary tablet:text-[15px]">
         Your donations can help. No amount is too small. Your gifts
@@ -76,25 +96,6 @@ const benefits = [
     </div>
     <Button href={DONATE_URL} external class="mt-5">Donate</Button>
 
-    <h2 id="newsletter" class="text-h3 mt-10 text-text-primary">Sign up for updates</h2>
-    <div class="mt-5 max-w-[480px]">
-      <NewsletterForm endpoint={FORMSPREE.joinUs} idPrefix="getinvolved-newsletter" />
-    </div>
-    <p class="mt-6 text-[14px] text-text-secondary">
-      Read the{" "}
-      <a
-        class="text-link border-b border-border pb-0.5 text-deep-green"
-        href={NEWSLETTER.current}
-      >
-        current newsletter
-      </a>{" "}
-      or browse the{" "}
-      <a
-        class="text-link border-b border-border pb-0.5 text-deep-green"
-        href={NEWSLETTER.archive}
-      >
-        archive
-      </a>.
-    </p>
+
   </div>
 </InteriorLayout>

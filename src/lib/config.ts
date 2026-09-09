@@ -16,8 +16,7 @@ export const DONATE_URL =
   "https://www.paypal.com/donate/?hosted_button_id=J3JALMAXU6E28";
 
 export const FORMSPREE = {
-  /** TODO(EHL): Formspree form ID for homepage/get-involved newsletter signup, e.g. https://formspree.io/f/XXXXXXX */
-  joinUs: "https://formspree.io/f/TODO-EHL-joinus",
+  joinUs: "https://formspree.io/f/xnpqowyp",
   /** TODO(EHL): Formspree form ID for the contact page */
   contact: "https://formspree.io/f/TODO-EHL-contact",
 } as const;

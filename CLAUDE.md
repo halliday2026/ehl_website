@@ -79,6 +79,14 @@ run can turn on itself.
   untouchable root `web.config`.
 - **Forms** post to Formspree via `src/scripts/forms.ts` (client-side fetch,
   no server-side handling). Endpoint IDs live in `src/lib/config.ts`.
+  `forms.ts` auto-wires *any* `form[data-formspree-form]` on the page, so new
+  forms just need that attribute — no extra JS. The newsletter signup
+  (`NewsletterModal.astro`) opens in a `<dialog>` rather than being inline,
+  same pattern as the gallery lightbox. Its form includes a honeypot field
+  (`name="_gotcha"`, visually hidden, `aria-hidden`) — Formspree silently
+  discards submissions where it's filled — as lightweight bot protection
+  without a CAPTCHA/Turnstile integration (which would need a site key we
+  don't have). Don't remove it as dead-looking markup.
 - **Donate** is always the `DONATE_URL` constant in `src/lib/config.ts` —
   never hardcode a donate link elsewhere. It's a PayPal **Hosted Donate
   Button** URL (`paypal.com/donate/?hosted_button_id=...`), i.e. a plain

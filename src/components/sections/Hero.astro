@@ -4,6 +4,7 @@ import Eyebrow from "../ui/Eyebrow.astro";
 import Button from "../ui/Button.astro";
 import TextLink from "../ui/TextLink.astro";
 import SiteNav from "../nav/SiteNav.astro";
+import { withBase } from "../../lib/url";
 import { DONATE_URL } from "../../lib/config";
 import heroImg from "../../assets/images/tree_frog_hero.webp";
 ---
@@ -43,7 +44,7 @@ import heroImg from "../../assets/images/tree_frog_hero.webp";
         <h1
           class="text-h1 mt-3 text-paper [text-shadow:0_2px_24px_rgba(0,0,0,.35)] [text-wrap:balance] tablet:mt-[18px]"
         >
-          Keeping Southern California wild.
+          Keeping Southern California wild
         </h1>
         <p
           class="text-lede mt-3.5 max-w-[620px] text-[rgba(251,248,241,.94)] [text-shadow:0_1px_12px_rgba(0,0,0,.35)] [text-wrap:pretty] tablet:mt-5"
@@ -65,6 +66,14 @@ import heroImg from "../../assets/images/tree_frog_hero.webp";
             class="w-full justify-center tablet:w-auto tablet:justify-start tablet:border-b tablet:pb-[3px]"
           >
             Explore our work →
+          </TextLink>
+          <TextLink
+            href={withBase("/get-involved/#newsletter")}
+            tone="on-photo"
+            bordered={false}
+            class="w-full justify-center tablet:w-auto tablet:justify-start tablet:border-b tablet:pb-[3px]"
+          >
+            Join our Newsletter →
           </TextLink>
         </div>
       </div>

@@ -8,6 +8,8 @@ interface Props {
   external?: boolean;
   class?: string;
   style?: string;
+  /** Any other attribute (e.g. a `data-*` hook for a script) passes through to the rendered tag. */
+  [attr: string]: unknown;
 }
 
 const {
@@ -19,6 +21,7 @@ const {
   external = false,
   class: className = "",
   style,
+  ...rest
 } = Astro.props;
 
 const variantClasses: Record<string, string> = {
@@ -36,6 +39,7 @@ const Tag = href ? "a" : "button";
 ---
 
 <Tag
+  {...rest}
   href={href}
   type={!href ? type : undefined}
   target={external ? "_blank" : undefined}

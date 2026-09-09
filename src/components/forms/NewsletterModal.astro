@@ -1,0 +1,144 @@
+---
+import Button from "../ui/Button.astro";
+
+interface Props {
+  endpoint: string;
+  idPrefix?: string;
+}
+
+const { endpoint, idPrefix = "newsletter" } = Astro.props;
+
+const fieldId = (name: string) => `${idPrefix}-${name}`;
+
+const regions = [
+  "Los Angeles County",
+  "San Diego County",
+  "Inland Empire",
+  "Orange County",
+  "Baja California",
+  "California state-wide",
+  "None",
+];
+
+const textFields: Array<{ name: string; label: string; type?: string; required?: boolean }> = [
+  { name: "firstName", label: "First Name", required: true },
+  { name: "lastName", label: "Last Name", required: true },
+  { name: "email", label: "Email", type: "email", required: true },
+  { name: "address", label: "Address" },
+  { name: "city", label: "City" },
+  { name: "state", label: "State" },
+  { name: "zip", label: "Zip" },
+  { name: "phoneWork", label: "Phone (Work)", type: "tel" },
+  { name: "phoneHome", label: "Phone (Home)", type: "tel" },
+  { name: "fax", label: "Fax", type: "tel" },
+];
+---
+
+<Button type="button" variant="dark" size="md" data-newsletter-open={idPrefix}>
+  Join our Newsletter
+</Button>
+
+<dialog
+  id={fieldId("dialog")}
+  data-newsletter-dialog
+  aria-label="Join our newsletter"
+  class="m-auto max-h-[90vh] w-[92vw] max-w-[560px] overflow-y-auto rounded-img border-0 bg-paper p-0 backdrop:bg-[rgba(20,26,20,.85)]"
+>
+  <div class="relative p-6 tablet:p-8">
+    <button
+      type="button"
+      data-newsletter-close
+      aria-label="Close"
+      class="absolute top-3 right-3 flex h-11 w-11 items-center justify-center text-2xl leading-none text-text-secondary"
+    >
+      &times;
+    </button>
+
+    <h2 class="text-h3 max-w-[420px] text-text-primary">Join our Newsletter</h2>
+    <p class="mt-2.5 max-w-[440px] text-[14px] leading-[1.6] text-text-secondary">
+      Please enter your information below (required fields marked with *) and
+      submit to become a member of Endangered Habitats League. Our network is
+      secure and we pledge never to share your name, email address, or other
+      information outside of EHL.
+    </p>
+
+    <form
+      data-formspree-form
+      data-endpoint={endpoint}
+      data-success-message="Thank you for becoming a member of our conservation community."
+      novalidate
+      class="mt-5 flex flex-col gap-4"
+    >
+      <div class="grid grid-cols-1 gap-4 tablet:grid-cols-2">
+        {
+          textFields.map((field) => (
+            <div class={field.name === "email" ? "tablet:col-span-2" : ""}>
+              <label
+                for={fieldId(field.name)}
+                class="mb-1 block font-body text-sm font-semibold text-text-primary"
+              >
+                {field.label}
+                {field.required && <span class="text-poppy"> *</span>}
+              </label>
+              <input
+                id={fieldId(field.name)}
+                name={field.name}
+                type={field.type || "text"}
+                required={field.required}
+                aria-describedby={`${fieldId(field.name)}-error`}
+                class="w-full rounded-btn border border-border bg-paper px-[18px] py-4 font-body text-[15px] text-text-primary"
+              />
+              <p
+                id={`${fieldId(field.name)}-error`}
+                data-field-error
+                aria-live="polite"
+                class="mt-1 text-[13px] text-poppy"
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <fieldset class="mt-1">
+        <legend class="mb-2 font-body text-sm font-semibold text-text-primary">
+          I wish to receive occasional action alerts affecting: (check all
+          that apply)
+        </legend>
+        <div class="grid grid-cols-1 gap-2 tablet:grid-cols-2">
+          {
+            regions.map((region, i) => (
+              <label class="flex items-center gap-2 text-[14px] text-text-secondary">
+                <input
+                  type="checkbox"
+                  name="regions"
+                  value={region}
+                  id={fieldId(`region-${i}`)}
+                  class="h-4 w-4 rounded-sm border border-border"
+                />
+                {region}
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      {/* Honeypot: Formspree silently discards submissions where this is filled. Hidden from sighted users and screen readers alike — a real visitor never sees or fills it. */}
+      <input
+        type="text"
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+        class="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+      />
+
+      <div class="mt-1 flex items-center gap-4">
+        <Button type="submit" variant="dark" size="md">Submit</Button>
+        <p data-form-status role="status" aria-live="polite" class="text-[13px] text-deep-green" />
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<script src="../../scripts/forms.ts"></script>
+<script src="../../scripts/newsletter-modal.ts"></script>
