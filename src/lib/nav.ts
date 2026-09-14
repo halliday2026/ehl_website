@@ -12,6 +12,7 @@ export const PRIMARY_NAV: NavLink[] = [
   { label: "What We Do", href: "/what-we-do/" },
   { label: "Projects", href: "/projects/" },
   { label: "Get Involved", href: "/get-involved/" },
+  { label: "Newsletter", href: "/get-involved/#newsletter" },
 ];
 
 export interface FooterColumn {
