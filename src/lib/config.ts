@@ -68,6 +68,10 @@ export const LOGO = {
  */
 export const NEWSLETTER = {
   current: "https://ehleague.org/news/public/GetCurrent.aspx",
-  // Corrected: this is a static root-level page, not under /news/.
-  archive: "https://ehleague.org/newsletter_archive_toc.html",
+  // The archive TOC itself now lives on this site — see
+  // src/pages/newsletter-archive.astro — rather than linking out to the
+  // legacy newsletter_archive_toc.html. That page's own per-issue links
+  // still point at the legacy site/PDFs; only the table-of-contents page
+  // moved. Route it through withBase() at the call site, same as any
+  // other internal link.
 } as const;
