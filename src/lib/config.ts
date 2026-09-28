@@ -22,15 +22,11 @@ export const FORMSPREE = {
 } as const;
 
 export const ORG = {
-  /**
-   * Mirrored from the live contact.html, which lists both "505 S Flower St
-   * #71001" and "PO Box 71001" for the same box number — using the street
-   * format here since it's the more complete/deliverable of the two.
-   */
-  addressLine: "505 S Flower St #71001",
+  addressLine: "PO Box 71001",
   city: "Los Angeles",
   state: "CA",
-  zip: "90071",
+  /** Client-provided ZIP+4 — note it's only 3 digits after the dash, not the usual 4; confirm before launch. */
+  zip: "90071-001",
   /** Given in the brief — CONFIRM this is still current before it goes live/visible in nav or footer. */
   phone: "213-804-2750",
   /** Footer copy reads "since [year]" in the design handoff. */
