@@ -62,17 +62,26 @@ const isOverlay = variant === "overlay";
                   &#9662;
                 </span>
               </a>
-              <div class="invisible absolute top-full left-0 z-20 mt-2 min-w-[190px] rounded-btn border border-border bg-paper py-2 opacity-0 shadow-lg transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                {link.children.map((child) => (
-                  <a
-                    href={child.external ? child.href : withBase(child.href)}
-                    target={child.external ? "_blank" : undefined}
-                    rel={child.external ? "noopener noreferrer" : undefined}
-                    class="block px-4 py-2 text-text-primary hover:bg-warm-alt"
-                  >
-                    {child.label}
-                  </a>
-                ))}
+              {/*
+                The pt-2 buffer above the card is deliberate: it's part of
+                this element's own hoverable box (a DOM child of .group), so
+                the mouse stays "inside" the dropdown the whole way from the
+                link down to the card, instead of crossing a gap that
+                belongs to neither element and drops group-hover early.
+              */}
+              <div class="invisible absolute top-full left-0 z-20 pt-2 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div class="min-w-[190px] rounded-btn border border-border bg-paper py-2 shadow-lg">
+                  {link.children.map((child) => (
+                    <a
+                      href={child.external ? child.href : withBase(child.href)}
+                      target={child.external ? "_blank" : undefined}
+                      rel={child.external ? "noopener noreferrer" : undefined}
+                      class="block px-4 py-2 text-text-primary hover:bg-warm-alt"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
