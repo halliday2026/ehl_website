@@ -1,9 +1,11 @@
-import { DONATE_URL } from "./config";
+import { DONATE_URL, NEWSLETTER } from "./config";
 
 export interface NavLink {
   label: string;
   href: string;
   external?: boolean;
+  /** Submenu items (desktop: hover/focus dropdown; mobile: indented under the parent). */
+  children?: NavLink[];
 }
 
 /** Primary nav — used by SiteNav (desktop) and MobileNav. */
@@ -12,7 +14,16 @@ export const PRIMARY_NAV: NavLink[] = [
   { label: "What We Do", href: "/what-we-do/" },
   { label: "Projects", href: "/projects/" },
   { label: "Get Involved", href: "/get-involved/" },
-  { label: "Newsletter", href: "/get-involved/#newsletter" },
+  {
+    label: "Newsletter",
+    href: "/get-involved/#newsletter",
+    children: [
+      // Same URLs as the "Read the current newsletter / browse the
+      // archive" links in the Get Involved page body — see get-involved.astro.
+      { label: "Current Newsletter", href: NEWSLETTER.current, external: true },
+      { label: "Archives", href: "/newsletter-archive/" },
+    ],
+  },
 ];
 
 export interface FooterColumn {
@@ -47,6 +58,9 @@ export const FOOTER_NAV: FooterColumn[] = [
       // Donate always uses DONATE_URL directly (never a route) — see CLAUDE.md.
       { label: "Donate", href: DONATE_URL, external: true },
       { label: "Newsletter", href: "/get-involved/#newsletter" },
+      // Same URLs as the Newsletter dropdown in PRIMARY_NAV above.
+      { label: "Current Newsletter", href: NEWSLETTER.current, external: true },
+      { label: "Newsletter Archives", href: "/newsletter-archive/" },
     ],
   },
   {

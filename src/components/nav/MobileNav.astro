@@ -25,12 +25,28 @@ import { withBase } from "../../lib/url";
   <nav aria-label="Mobile" class="mt-10 flex flex-col gap-1">
     {
       PRIMARY_NAV.map((link) => (
-        <a
-          href={withBase(link.href)}
-          class="text-link flex min-h-[44px] items-center border-b border-divider-dark py-3 font-body text-lg text-paper"
-        >
-          {link.label}
-        </a>
+        <div class="border-b border-divider-dark">
+          <a
+            href={withBase(link.href)}
+            class="text-link flex min-h-[44px] items-center py-3 font-body text-lg text-paper"
+          >
+            {link.label}
+          </a>
+          {link.children && (
+            <div class="flex flex-col gap-1 pb-3 pl-4">
+              {link.children.map((child) => (
+                <a
+                  href={child.external ? child.href : withBase(child.href)}
+                  target={child.external ? "_blank" : undefined}
+                  rel={child.external ? "noopener noreferrer" : undefined}
+                  class="text-link flex min-h-[40px] items-center font-body text-base text-[rgba(251,248,241,.85)]"
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       ))
     }
   </nav>

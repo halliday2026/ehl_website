@@ -47,17 +47,46 @@ const isOverlay = variant === "overlay";
       class="hidden items-center gap-[30px] font-body text-[14.5px] font-medium tablet:flex"
     >
       {
-        PRIMARY_NAV.map((link) => (
-          <a
-            href={withBase(link.href)}
-            class:list={[
-              "text-link",
-              isOverlay ? "text-[rgba(251,248,241,.9)]" : "text-text-primary",
-            ]}
-          >
-            {link.label}
-          </a>
-        ))
+        PRIMARY_NAV.map((link) =>
+          link.children ? (
+            <div class="group relative">
+              <a
+                href={withBase(link.href)}
+                class:list={[
+                  "text-link inline-flex items-center gap-1",
+                  isOverlay ? "text-[rgba(251,248,241,.9)]" : "text-text-primary",
+                ]}
+              >
+                {link.label}
+                <span aria-hidden="true" class="text-[10px]">
+                  &#9662;
+                </span>
+              </a>
+              <div class="invisible absolute top-full left-0 z-20 mt-2 min-w-[190px] rounded-btn border border-border bg-paper py-2 opacity-0 shadow-lg transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                {link.children.map((child) => (
+                  <a
+                    href={child.external ? child.href : withBase(child.href)}
+                    target={child.external ? "_blank" : undefined}
+                    rel={child.external ? "noopener noreferrer" : undefined}
+                    class="block px-4 py-2 text-text-primary hover:bg-warm-alt"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={withBase(link.href)}
+              class:list={[
+                "text-link",
+                isOverlay ? "text-[rgba(251,248,241,.9)]" : "text-text-primary",
+              ]}
+            >
+              {link.label}
+            </a>
+          ),
+        )
       }
     </nav>
 

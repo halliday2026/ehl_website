@@ -17,6 +17,22 @@ function setFieldError(
   else field.removeAttribute("aria-invalid");
 }
 
+/**
+ * A `<fieldset data-require-one>` around a group of same-name checkboxes
+ * requires at least one of them to be checked. Native `required` can't
+ * express "at least one of N" for a checkbox group, so this is handled
+ * separately from the plain `input[required]` fields above.
+ */
+function validateCheckboxGroup(fieldset: HTMLFieldSetElement): string {
+  const anyChecked = fieldset.querySelector('input[type="checkbox"]:checked');
+  return anyChecked ? "" : "Please select at least one option.";
+}
+
+function setGroupError(fieldset: HTMLFieldSetElement, message: string) {
+  const errorEl = fieldset.querySelector<HTMLElement>("[data-field-error]");
+  if (errorEl) errorEl.textContent = message;
+}
+
 function initForm(form: HTMLFormElement) {
   const endpoint = form.dataset.endpoint;
   const status = form.querySelector<HTMLElement>("[data-form-status]");
@@ -32,19 +48,30 @@ function initForm(form: HTMLFormElement) {
       "input[required], textarea[required]",
     ),
   );
+  const checkboxGroups = Array.from(
+    form.querySelectorAll<HTMLFieldSetElement>("fieldset[data-require-one]"),
+  );
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    let firstInvalid: HTMLInputElement | HTMLTextAreaElement | null = null;
+    let firstInvalid: HTMLElement | null = null;
     fields.forEach((field) => {
       const message = validateField(field);
       setFieldError(field, message);
       if (message && !firstInvalid) firstInvalid = field;
     });
 
+    checkboxGroups.forEach((fieldset) => {
+      const message = validateCheckboxGroup(fieldset);
+      setGroupError(fieldset, message);
+      if (message && !firstInvalid) {
+        firstInvalid = fieldset.querySelector<HTMLInputElement>('input[type="checkbox"]');
+      }
+    });
+
     if (firstInvalid) {
-      (firstInvalid as HTMLInputElement | HTMLTextAreaElement).focus();
+      firstInvalid.focus();
       if (status)
         status.textContent =
           "Please fix the highlighted field before submitting.";

@@ -28,7 +28,7 @@ const textFields: Array<{ name: string; label: string; type?: string; required?:
 ---
 
 <Button type="button" variant="dark" size="md" data-newsletter-open={idPrefix}>
-  Join Our Newsletter
+  Receive our Newsletter
 </Button>
 
 <dialog
@@ -47,7 +47,7 @@ const textFields: Array<{ name: string; label: string; type?: string; required?:
       &times;
     </button>
 
-    <h2 class="text-h3 max-w-[420px] text-text-primary">Join our Newsletter</h2>
+    <h2 class="text-h3 max-w-[420px] text-text-primary">Sign up and Receive our Newsletter</h2>
     <p class="mt-2.5 max-w-[440px] text-[14px] leading-[1.6] text-text-secondary">
       Please enter your information below (required fields marked with *) and
       submit to become a member of Endangered Habitats League. Our network is
@@ -92,10 +92,10 @@ const textFields: Array<{ name: string; label: string; type?: string; required?:
         }
       </div>
 
-      <fieldset class="mt-1">
+      <fieldset class="mt-1" data-require-one>
         <legend class="mb-2 font-body text-sm font-semibold text-text-primary">
           I wish to receive occasional action alerts affecting: (check all
-          that apply)
+          that apply) <span class="text-poppy">*</span>
         </legend>
         <div class="grid grid-cols-1 gap-2 tablet:grid-cols-2">
           {
@@ -113,6 +113,7 @@ const textFields: Array<{ name: string; label: string; type?: string; required?:
             ))
           }
         </div>
+        <p data-field-error aria-live="polite" class="mt-2 text-[13px] text-poppy" />
       </fieldset>
 
       {/* Honeypot: Formspree silently discards submissions where this is filled. Hidden from sighted users and screen readers alike — a real visitor never sees or fills it. */}
