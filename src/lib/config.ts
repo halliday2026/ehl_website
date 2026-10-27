@@ -60,18 +60,12 @@ export const LOGO = {
 } as const;
 
 /**
- * Legacy ASP.NET newsletter app — never rebuilt, only linked to. Always
- * fully-qualified against the real production domain (not a root-relative
- * path): it only ever exists on Hostway, never on a preview host like the
- * GitHub Pages build, which serves everything else under a /ehl_website
- * subpath and has no /news/ of its own.
+ * The newsletter has migrated off the old ASP.NET/Hostway app entirely —
+ * it's now its own app at news.ehleague.org (hosted on Render), with its
+ * own URL structure unrelated to the old /news/public/... paths. Always
+ * external links; this repo doesn't build or host any of it.
  */
 export const NEWSLETTER = {
-  current: "https://ehleague.org/news/public/GetCurrent.aspx",
-  // The archive TOC itself now lives on this site — see
-  // src/pages/newsletter-archive.astro — rather than linking out to the
-  // legacy newsletter_archive_toc.html. That page's own per-issue links
-  // still point at the legacy site/PDFs; only the table-of-contents page
-  // moved. Route it through withBase() at the call site, same as any
-  // other internal link.
+  current: "https://news.ehleague.org/current",
+  archive: "https://news.ehleague.org/archive",
 } as const;

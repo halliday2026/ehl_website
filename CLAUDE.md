@@ -3,50 +3,46 @@
 ## What this is
 
 Marketing site for the Endangered Habitats League (EHL), a Southern California
-land-conservation nonprofit. Astro 7 static site + Tailwind v4. Production
-deploys to Hostway (Windows/IIS) via GitHub Actions + FTPS; a second workflow
-deploys the same build to GitHub Pages as a client-review preview (see
-"Client-review preview" below). The original design-handoff reference folder
-has been deleted (its spec is now fully implemented) — don't recreate it.
-Verify changes with `npm run build`. Design tokens live in the `@theme` block
-in `src/styles/global.css`; real habitat photos live in `src/assets/images/`
-(see that folder's own `README.md` for what's used where).
+land-conservation nonprofit. Astro 7 static site + Tailwind v4. Production is
+**GitHub Pages**, served at the `ehleague.org` / `www.ehleague.org` custom
+domain (DNS + HTTPS already provisioned and verified live). The original
+design-handoff reference folder has been deleted (its spec is now fully
+implemented) — don't recreate it. Verify changes with `npm run build`. Design
+tokens live in the `@theme` block in `src/styles/global.css`; real habitat
+photos live in `src/assets/images/` (see that folder's own `README.md` for
+what's used where).
 
-## Hosting guardrails — read before touching anything server-related
+## Hosting
 
-The site shares its IIS web root with a **live legacy ASP.NET application**
-(the newsletter). This is the load-bearing constraint behind nearly every
-technical decision here:
+`.github/workflows/deploy-preview.yml` builds and deploys to GitHub Pages on
+every push to `main` (the name is a holdover from when this was just a
+preview — it's the real production deploy now). It builds with `BUILD_TARGET`
+**unset**, which gives the root-relative config in `astro.config.mjs`
+(`base: '/'`, `site: 'https://ehleague.org'`) that the custom domain needs.
+**Never set `BUILD_TARGET=gh-pages` in that workflow** — that produces a
+`/ehl_website`-subpath build, which breaks every internal link and flips
+`robots.txt` to `Disallow: /` on the live domain. This exact mistake shipped
+once already; it's why this section exists.
 
-- **Never create, edit, or deploy a `web.config`.** The existing server one is
-  load-bearing for the newsletter's Forms auth, SQL connection strings, and
-  Telerik editor handlers. There must be no `web.config` anywhere in this repo
-  or in `dist/`.
-- **Never touch** `/news/`, `bin/`, `App_Data/`, `App_GlobalResources/`,
-  `Global.asax`, or `involved.aspx`. These live only on the host, not in this
-  repo. `.claude/settings.json` hard-blocks writes to these paths.
-- **Never generate a route named `news`.** The new "Get Involved" page lives
-  at `/get-involved/`, distinct from the retired `involved.aspx`.
-- Output is static (`output: 'static'`, `build.format: 'directory'`,
-  `trailingSlash: 'always'`) — this matches the server's existing
-  default-document behavior (`/about/` → `/about/index.html`).
-- **`.webp` images are an open risk, not a solved problem.** All photos build
-  through Astro's image pipeline to `.webp`. Older/unpatched IIS installs
-  don't have that MIME type registered, and we can't fix it the normal way
-  (a `web.config` `<mimeMap>` entry) because we can't touch `web.config`. This
-  has NOT been verified against the real Hostway server yet. Before the first
-  real production deploy: either confirm `.webp` already 404s or works on
-  Hostway and have the client add the mapping by hand (small, additive,
-  outside this repo — see conversation history / ask the user), or switch
-  Astro's image output to `.jpg` (universally safe, modest size cost). Don't
-  assume either is done without checking.
+`BUILD_TARGET=gh-pages` still exists as a manual fallback: it builds for the
+default `halliday2026.github.io/ehl_website/` URL (no custom domain), useful
+only if `ehleague.org` itself is ever down. Nothing currently deploys with it
+set. Because that fallback build lives under a subpath, **every internal
+link must still go through `withBase()`** (`src/lib/url.ts`) regardless of
+which target you're building for — a bare `href="/about/"` would 404 on the
+fallback build (harmless no-op on the real production build, where `base` is
+already `/`).
 
-## Deploy guardrail
-
-`.github/workflows/deploy.yml` uses `SamKirkland/FTP-Deploy-Action`. **Never
-enable `dangerous-clean-slate`** — it would wipe the ASP.NET files, which
-aren't in this repo and can't be restored from git. The `exclude` list is the
-other half of that protection; don't remove entries from it.
+**Historical context, in case old comments/instincts reference it:** this
+site used to share an IIS web root on Hostway with a live legacy ASP.NET
+newsletter app, which is why `web.config`, `/news/`, `involved.aspx`, and
+`.webp`-MIME-type-on-IIS used to be load-bearing constraints documented here.
+**None of that applies anymore.** The newsletter has fully migrated to its
+own app at `news.ehleague.org` (hosted on Render — see `NEWSLETTER` in
+`src/lib/config.ts`), and the Hostway FTPS deploy workflow has been removed
+entirely. This repo has no IIS, no `web.config`, and no ASP.NET-adjacent path
+to avoid — if you find old comments elsewhere in the codebase still warning
+about these, they're stale, not a sign of a constraint that came back.
 
 ## Launch checklist
 
@@ -55,22 +51,6 @@ not before (e.g. updating the PayPal donate button's return/cancel URLs in
 the PayPal dashboard, currently still pointed at the legacy site). Check it
 before any real production go-live, and add to it rather than letting
 cutover-only tasks get silently handled inline elsewhere.
-
-## Client-review preview (GitHub Pages)
-
-`.github/workflows/deploy-preview.yml` deploys the same site to GitHub Pages
-on every push to `main` — entirely separate infrastructure from Hostway, safe
-to redeploy freely. It builds with `BUILD_TARGET=gh-pages`, which
-`astro.config.mjs` uses to switch `site`/`base` to the subpath GitHub Pages
-serves project sites from (`https://halliday2026.github.io/ehl_website/`),
-since there's no custom domain for the preview. Because of that subpath,
-**every internal link must go through `withBase()`** (`src/lib/url.ts`) —
-a bare `href="/about/"` will 404 on the preview (still fine on production,
-where `base` is `/`). `robots.txt` (`src/pages/robots.txt.ts`) disallows all
-crawling on the preview build so it never gets indexed as if it were the
-real site. Requires GitHub Pages enabled in repo settings (Settings → Pages
-→ Source: GitHub Actions) — a one-time manual step, not something a workflow
-run can turn on itself.
 
 ## Other invariants
 
@@ -92,6 +72,13 @@ run can turn on itself.
   Button** URL (`paypal.com/donate/?hosted_button_id=...`), i.e. a plain
   external redirect — deliberately not an embedded PayPal JS SDK button.
   Don't reintroduce an embedded/SDK version without it being asked for.
+- **Newsletter** content/pages are always external — `NEWSLETTER.current` and
+  `NEWSLETTER.archive` in `src/lib/config.ts`, both pointing at
+  `news.ehleague.org` (a separate app on Render, not part of this repo). This
+  repo doesn't mirror, rebuild, or host any newsletter content itself — there
+  was a static `/newsletter-archive/` page here briefly that mirrored the old
+  legacy TOC, but it was removed once the real app's own archive existed,
+  since its per-issue links had gone stale. Don't recreate that pattern.
 - **Never invent copy** for bracketed placeholders (`[ Street Address ]`,
   `[ Field story headline ]`, etc.) or unresolved config values — leave them
   clearly marked for the client to fill in. Comments use `TODO(EHL): ...`;

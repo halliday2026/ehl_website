@@ -3,7 +3,6 @@ import InteriorLayout from "../layouts/InteriorLayout.astro";
 import NewsletterModal from "../components/forms/NewsletterModal.astro";
 import Button from "../components/ui/Button.astro";
 import { FORMSPREE, NEWSLETTER, DONATE_URL } from "../lib/config";
-import { withBase } from "../lib/url";
 import heroImg from "../assets/images/rainbow.webp";
 
 const benefits = [
@@ -49,13 +48,17 @@ const benefits = [
       <a
         class="text-link border-b border-border pb-0.5 text-deep-green"
         href={NEWSLETTER.current}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         current newsletter
       </a>{" "}
       or browse the{" "}
       <a
         class="text-link border-b border-border pb-0.5 text-deep-green"
-        href={withBase("/newsletter-archive/")}
+        href={NEWSLETTER.archive}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         archive
       </a>.

@@ -5,10 +5,11 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
-// Set BUILD_TARGET=gh-pages to build a client-preview copy for GitHub Pages
-// (served from a /ehl_website/ subpath, not the domain root). Leave unset
-// for the real production build targeting Hostway — never mix these up in
-// the deploy workflow that pushes to the live FTPS server.
+// Production is GitHub Pages, served at the ehleague.org custom domain root
+// (see deploy-preview.yml) — that's the default (BUILD_TARGET unset) build
+// below. BUILD_TARGET=gh-pages is now only a manual fallback: it builds for
+// the default halliday2026.github.io/ehl_website/ subpath URL, useful if
+// the custom domain is ever down, but nothing currently deploys with it set.
 const isGhPages = process.env.BUILD_TARGET === 'gh-pages';
 
 // https://astro.build/config

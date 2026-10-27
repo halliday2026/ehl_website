@@ -21,7 +21,7 @@ export const PRIMARY_NAV: NavLink[] = [
       // Same URLs as the "Read the current newsletter / browse the
       // archive" links in the Get Involved page body — see get-involved.astro.
       { label: "Current Newsletter", href: NEWSLETTER.current, external: true },
-      { label: "Archives", href: "/newsletter-archive/" },
+      { label: "Archives", href: NEWSLETTER.archive, external: true },
     ],
   },
 ];
@@ -60,7 +60,7 @@ export const FOOTER_NAV: FooterColumn[] = [
       { label: "Newsletter", href: "/get-involved/#newsletter" },
       // Same URLs as the Newsletter dropdown in PRIMARY_NAV above.
       { label: "Current Newsletter", href: NEWSLETTER.current, external: true },
-      { label: "Newsletter Archives", href: "/newsletter-archive/" },
+      { label: "Newsletter Archives", href: NEWSLETTER.archive, external: true },
     ],
   },
   {

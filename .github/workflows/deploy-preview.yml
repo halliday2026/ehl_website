@@ -1,8 +1,13 @@
-name: Deploy client-review preview to GitHub Pages
+name: Deploy to GitHub Pages (production — ehleague.org)
 
-# Completely separate from deploy.yml (which pushes to production Hostway
-# over FTPS). This workflow only ever touches GitHub's own Pages
-# infrastructure — it cannot reach the live site.
+# The newsletter app has moved to news.ehleague.org, so this site no longer
+# shares a host with it — GitHub Pages, via the ehleague.org/www.ehleague.org
+# custom domain, is now the real production target. Builds WITHOUT
+# BUILD_TARGET=gh-pages so it gets the root-relative production config
+# (base: '/', site: https://ehleague.org) — the old /ehl_website subpath
+# build is only for the default halliday2026.github.io/ehl_website/ URL,
+# which is no longer what's wired to the custom domain. See deploy.yml for
+# the (now likely obsolete) Hostway FTPS path.
 
 on:
   push:
@@ -34,10 +39,8 @@ jobs:
 
       - run: npm ci
 
-      - name: Build (GitHub Pages target — served from a /ehl_website subpath)
+      - name: Build (production config — served at the ehleague.org root)
         run: npm run build
-        env:
-          BUILD_TARGET: gh-pages
 
       - uses: actions/configure-pages@v5
 

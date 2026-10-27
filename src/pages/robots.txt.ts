@@ -1,8 +1,11 @@
 import type { APIRoute } from "astro";
 
-// Preview builds (GitHub Pages) should never be indexed — this is a
-// throwaway client-review URL, not the real site. Only the production
-// Hostway build advertises itself to crawlers and points at the sitemap.
+// The BUILD_TARGET=gh-pages variant (the default halliday2026.github.io/
+// ehl_website/ subpath URL, not the ehleague.org custom domain — see
+// astro.config.mjs) should never be indexed, since it's a secondary/fallback
+// URL for the same content. The real production build (BUILD_TARGET unset,
+// served at ehleague.org) advertises itself to crawlers and points at the
+// sitemap.
 const isGhPages = process.env.BUILD_TARGET === "gh-pages";
 
 export const GET: APIRoute = ({ site }) => {
